@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% block content %}
+  
+
+    {% if messages %}
+      <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">
+          <div class="alert alert-{% if message.tags == 'error'%}danger{% else %}{{message.tags}} {% endif %}" role="alert">
+            {{ message|safe }}
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" wfd-id="1025">
+          <span aria-hidden="true">×</span>
+        </button>
+          </div>
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  
+
+  <!-- Profile Start -->
+  <section id="agent-2-peperty" class="profile padding">
+
+    {% include 'profile/profile-menu.html' %}
+    
+    <div class="container-3">
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <h2 class="text-uppercase bottom30">my profile</h2>
+          <div class="agent-p-img">
+            <img src="images/profile.jpg" class="img-responsive" alt="image"/>
+            <a href="#" class="top10 bottom20">Update Profile Picture</a>
+            <p class="text-center">Minimum 215px x 215px<span>*</span></p>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="profile-form">
+            <div class="row">
+              
+              <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{user_form.as_p}}
+                {{profile_form.as_p}}
+                <p><input type="submit" value="Save changes"></p> 
+              </form>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- Profile end -->
+
+
+
+
+<div class="container">
+<div class="row">
+<div class="col-md-10 ">
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>User profile form requirement</legend>
+
+<!-- Text input-->
+
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="First Name">First Name</label>  
+  <div class="col-md-4">
+   <div class="input-group">
+     <div class="input-group-addon">
+      <i class="fa fa-user">
+      </i>
+     </div>
+     <input id="First Name" name="first_name" type="text" placeholder="First Name" id='id_first_name' class="form-control input-md">
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Last Name">Last Name</label>  
+  <div class="col-md-4">
+   <div class="input-group">
+     <div class="input-group-addon">
+      <i class="fa fa-user">
+      </i>
+     </div>
+     <input id="Last Name" name="last_name" type="text" placeholder="Last Name" id='id_last_name' class="form-control input-md">
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Phone Number">Phone Number</label>  
+  <div class="col-md-4">
+   <div class="input-group">
+     <div class="input-group-addon">
+      <i class="fa fa-user">
+      </i>
+     </div>
+     <input id="mobile" name="mobile" type="text" placeholder="Mobile" id='id_mobile' class="form-control input-md">
+    </div>
+  </div>
+</div>
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Upload photo">Upload photo</label>
+  <div class="col-md-4">
+    <input id="Upload photo" name="Upload photo" class="input-file" type="file">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Date Of Birth">Date Of Birth</label>  
+  <div class="col-md-4">
+  <div class="input-group">
+       <div class="input-group-addon">
+         <i class="fa fa-birthday-cake"></i>
+       </div>
+       <input id="Date Of Birth" name="date_of_birth" type="text" placeholder="Date Of Birth" class="form-control input-md">
+      </div>
+  </div>
+</div>
+
+
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Email Address">Email Address</label>  
+  <div class="col-md-4">
+  <div class="input-group">
+       <div class="input-group-addon">
+     <i class="fa fa-envelope-o"></i>
+        
+       </div>
+    <input id="Email Address" name="Email Address" type="text" placeholder="Email Address" class="form-control input-md">
+    
+      </div>
+  
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Overview (max 200 words)">Overview (max 200 words)</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" rows="10"  id="id_about" name="about">Overview</textarea>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label class="col-md-4 control-label" ></label>  
+  <div class="col-md-4">
+  <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span> Submit</a>
+  <a href="#" class="btn btn-danger" value=""><span class="glyphicon glyphicon-remove-sign"></span> Clear</a>
+    
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
+<div class="col-md-2 hidden-xs">
+<img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">
+  </div>
+
+
+</div>
+   </div>
+  
+{% endblock %}

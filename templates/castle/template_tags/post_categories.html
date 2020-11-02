@@ -1,0 +1,8 @@
+<ul class="pro-list padding-t-20">
+
+   {% for cat in cats %}
+      <li>
+      	<a href="{% url 'news:list_post_by_category' cat.slug %}">{{cat}}</a>
+      </li>
+   {% endfor %}         
+</ul>

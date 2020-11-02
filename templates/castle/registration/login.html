@@ -1,0 +1,102 @@
+{% extends 'base.html'  %}
+{% block content %}
+	
+	<section class="page-banner padding" style="background-position: 50% -57px;">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-md-12 text-center">
+	        <h1 class="text-uppercase">Login</h1>
+	        <p>Serving you since 1999. Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+	        <ol class="breadcrumb text-center">
+	          <li><a href="#">Home</a></li>
+	          <li><a href="#">Pages</a></li>
+	          <li class="active">Login</li>
+	        </ol>
+	      </div>
+	    </div>
+	  </div>
+	</section>
+
+	<section id="login" class="padding">
+	  <div class="container">
+	    <h3 class="hidden">hidden</h3>
+	    <div class="row">
+	      <div class="col-md-12 text-center">
+	        <div class="profile-login">
+	          <!-- Nav tabs -->
+	          <ul class="nav nav-tabs" role="tablist">
+	            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">Login</a></li>
+	            <li role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false">Register</a></li>
+	          </ul>
+	          <!-- Tab panes -->
+	          <div class="tab-content padding_half">
+	            <div role="tabpanel" class="tab-pane fade active in" id="home">
+	              <div class="agent-p-form">
+	                <form method="post" action="{% url 'account:login' %}" class="callus clearfix">
+	                  <div class="single-query form-group col-sm-12">
+	                    <input type="text" class="keyword-input" name="username" placeholder="username">
+	                  </div>
+	                  {% csrf_token %}
+	                  <div class="single-query form-group  col-sm-12">
+	                    <input type="password" autocomplete="current-password" class="keyword-input" name="password" placeholder="Password">
+	                  </div>
+	                  <div class="row">
+	                    <div class="col-sm-12">
+	                      <div class="col-sm-6">
+	                        <div class="search-form-group white form-group text-left">
+	                          <div class="check-box-2"><i><div class="check-box"><i><input type="checkbox" name="check-box"></i></div></i></div>
+	                          <span>Remember Me</span>
+	                        </div>
+	                      </div>
+	                      <div class="col-sm-6 text-right">
+	                        <a href="{% url 'account:password_reset' %}" class="lost-pass">Lost your password?</a>
+	                      </div>
+	                    </div>
+	                  </div>
+	                  <div class=" col-sm-12">
+	                    <input type="submit" value="submit now" class="btn-slide border_radius"> 
+	                  </div>
+	                </form>
+	              </div>
+	            </div>
+	            <div role="tabpanel" class="tab-pane fade" id="profile">
+	              <div class="agent-p-form">
+	                <form class="callus clearfix" method="post" action="{% url 'account:register' %}">
+	                  <div class="single-query col-sm-12 form-group">
+	                    <input type="text" class="keyword-input" name="username" placeholder="Username" required="">
+	                  </div>
+
+	                  <div class="single-query col-sm-12 form-group">
+	                    <input type="text" class="keyword-input" name="first_name" placeholder="First Name" required="">
+	                  </div>
+
+	                  <div class="single-query col-sm-12 form-group">
+	                    <input type="text" class="keyword-input" name="email" placeholder="Email Address">
+	                  </div>
+	                  <div class="single-query col-sm-12 form-group">
+	                    <input type="password" name="password" class="keyword-input" placeholder="Password">
+	                  </div>
+	                  <div class="single-query col-sm-12 form-group">
+	                    <input type="password" name="password2" class="keyword-input" placeholder="Confirm  Password" readonly="">
+	                  </div>
+	                  <div class="search-form-group white col-sm-12 form-group text-left">
+	                    <div class="check-box-2"><i><div class="check-box"><i><input type="checkbox" name="check-box"></i></div></i></div>
+	                    <span>Receive Newsletter</span>
+	                  </div>
+	                  {% csrf_token %}
+	                  <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+	                    <div class="query-submit-button">
+	                      <input type="submit" value="Creat an Account" class="btn-slide">
+	                    </div>
+	                  </div>
+	                </form>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</section>
+
+{% endblock %}

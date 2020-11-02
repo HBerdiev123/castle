@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+  <!-- Page Banner Start-->
+  <section class="page-banner page-banner-bg padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="p-white text-uppercase">Blog Classic</h1>
+          <p class="p-white">Select one of the frequently asked questions below to learn more about buying, selling, and renting real estate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Page Banner End --> 
+
+  <!-- News Start -->
+  <section id="news-section-1" class="property-details padding_top">
+     <div class="container property-details">
+        <div class="row">
+           <div class="col-md-8">
+              <div class="row">
+              
+                {% for post in posts %}
+                   <div class="news-1-box clearfix">
+                      <div class="col-xs-12">
+                         <div class="image bottom30">
+                            <a href="{{post.get_absolute_url}}"><img src="{{ post.post_image.url }}" alt="image" class="img-responsive"/></a>
+                         </div>
+                      </div>
+                      <div class="col-xs-12">
+                         <div class="news-details bottom15">
+                            <span><i class="icon-icons230"></i> {% trans "by" %} {{post.author}}</span>
+                            <span><i class="icon-icons228"></i>{{post.created|date:"M d, yy"}}</span>
+                         </div>
+                         <h3 class="bottom10"><a href="{{post.get_absolute_url}}">{{post.title}}</a></h3>
+                         <p class="bottom20">{{post.body|truncatechars_html:250|safe}}</p>
+                         <div class="pro-3-link padding-t-20">
+                            <a class="btn-dark border_radius" href="{{post.get_absolute_url}}">{% trans "Read More" %}</a>
+                         </div>
+                      </div>
+                   </div>
+                {% endfor %} 
+              
+              </div>
+
+              <div class="row margin_bottom">
+                 <div class="col-md-12">
+                   <ul class="pager">
+                      {% if posts.has_previous %}
+                          <li><a href="?page=1">&laquo; first</a></li>
+                          <li><a href="?page={{ posts.previous_page_number }}">previous</a></li>
+                      {% endif %}
+
+                      <span class="current">
+                          <li>Page {{ posts.number }} of {{ posts.paginator.num_pages }}. </li>
+                      </span>
+
+                      {% if posts.has_next %}
+                          <li><a href="?page={{ posts.next_page_number }}">next</a></li>
+                          <li><a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a></li>
+                      {% endif %}
+                    </ul>
+                 </div>
+              </div>
+
+           </div>
+           <aside class="col-md-4 col-xs-12">
+              <div class="row">
+                 <div class="col-md-12">
+                    <form class="form-search bottom40" method="post" id="news-search" action="{% url 'news:search' %}">
+                       <div class="input-append">
+                          <input type="text" class="input-medium search-query" placeholder="Search Here" value="" name="query">
+                          {% csrf_token %}
+                          <button type="submit" class="add-on"><i class="icon-icons185"></i></button>
+                       </div>
+                    </form>
+                 </div>
+                 <div class="col-md-12">
+                    <h3 class="bottom20">Categories</h3>
+                    <ul class="pro-list bottom20">
+                        <li><a href="{% url 'news:list' %}">All Posts</a></li>
+                       {% for cat in cats %}
+                         <li>
+                            <a href="{% url 'news:list_post_by_category' cat_slug=cat.slug%}">{{cat}}</a>
+                         </li>
+                       {% endfor %}
+                      
+                    </ul>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-12">
+                    <h3 class="bottom40 margin40">Featured Properties</h3>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-4 col-sm-4 col-xs-12 p-image image bottom20">
+                    <img src="{% static 'images/f-p-1.png' %}" alt="image"/>
+                 </div>
+                 <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="feature-p-text">
+                       <h4><a href="#.">Get the best property in Town by our agent</a></h4>
+                       <span>by Martin Moore</span>
+                    </div>
+                 </div>
+              </div>
+              <div class="row padding-b-30 padding-t-30">
+                 <div class="col-md-4 col-sm-4 col-xs-12 p-image image bottom20">
+                    <img src="{% static 'images/f-p-1.png' %}" alt="image"/>
+                 </div>
+                 <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="feature-p-text">
+                       <h4><a href="#.">Get the best property in Town by our agent</a></h4>
+                       <span>by Martin Moore</span>
+                    </div>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-4 col-sm-4 col-xs-12 p-image image">
+                    <img src="{% static 'images/f-p-1.png' %}" alt="image"/>
+                 </div>
+                 <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="feature-p-text">
+                       <h4><a href="#.">Get the best property in Town by our agent</a></h4>
+                       <span>by Martin Moore</span>
+                    </div>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-12">
+                    <h3 class="margin40 bottom20">Featured Properties</h3>
+                 </div>
+                 <div class="col-md-12 padding-t-30">
+                    <div id="agent-2-slider" class="owl-carousel">
+                       <div class="item">
+                          <div class="property_item heading_space">
+                             <div class="image">
+                                <a href="#."><img src="{% static 'images/slider-list2.jpg' %}" alt="listin" class="img-responsive"></a>
+                                <div class="feature"><span class="tag-2">For Rent</span></div>
+                                <div class="price clearfix"><span class="tag pull-right">$8,600 Per Month - <small>Family Home</small></span></div>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="item">
+                          <div class="property_item heading_space">
+                             <div class="image">
+                                <a href="#."><img src="{% static 'images/slider-list2.jpg' %}" alt="listin" class="img-responsive"></a>
+                                <div class="feature"><span class="tag-2">For Rent</span></div>
+                                <div class="price clearfix"><span class="tag pull-right">$8,600 Per Month - <small>Family Home</small></span></div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </aside>
+        </div>
+     </div>
+  </section>
+  <!-- News End -->
+
+  <!--Partners-->
+  <section id="logos">
+    <div class="container partners padding_top">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <h2 class="uppercase">Our Partners</h2>
+          <p class="heading_space">Aliquam nec viverra erat. Aenean elit tellus mattis quis maximus.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div id="partner-slider" class="owl-carousel">
+          <div class="item">
+            <img src="{% static 'images/logo1.png' %}" alt="Featured Partner">
+          </div>
+          <div class="item">
+            <img src="{% static 'images/logo2.png' %}" alt="Featured Partner">
+          </div>
+          <div class="item">
+            <img src="{% static 'images/logo3.png' %}" alt="Featured Partner">
+          </div>
+          <div class="item">
+            <img src="{% static 'images/logo4.png' %}" alt="Featured Partner">
+          </div>
+          <div class="item">
+            <img src="{% static 'images/logo5.png' %}" alt="Featured Partner">
+          </div>
+          <div class="item">
+            <img src="{% static 'images/logo1.png' %}" alt="Featured Partner">
+          </div>
+          <div class="item">
+            <img src="{% static 'images/logo2.png' %}" alt="Featured Partner">
+          </div>
+          <div class="item">
+            <img src="{% static 'images/logo3.png' %}" alt="Featured Partner">
+          </div>
+          <div class="item">
+            <img src="{% static 'images/logo4.png' %}" alt="Featured Partner">
+          </div>
+          <div class="item">
+            <img src="{% static 'images/logo5.png' %}" alt="Featured Partner">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Partners Ends-->
+
+{%endblock%}
+
+

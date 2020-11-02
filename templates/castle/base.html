@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% block head %}
+	{% include 'head_page.html' %}
+{% endblock %}
+
+<body>
+	
+	{% block loader %}
+		{% include "loader.html" %}
+	{% endblock %}
+
+	{% block header %}
+		{% include "header_page.html" %}
+	{% endblock %}
+
+	{% block content %}
+	{% endblock %}
+
+	{% block footer %}
+	  {% include 'footer_page.html' %}
+	{% endblock %}
+
+			<script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+		<script>
+			var csrftoken = Cookies.get('csrftoken');
+			function csrfSafeMethod(method) {
+			// these HTTP methods do not require CSRF protection
+				return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+			}
+			
+			$.ajaxSetup({
+				beforeSend: function(xhr, settings) {
+				if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken);
+				}
+				}
+			});
+		</script>
+	{% block domready %}
+
+	{% endblock %}
+
+</body>
+
+<!-- Mirrored from wahabali.com/work/castle/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 Apr 2020 09:19:07 GMT -->
+</html>

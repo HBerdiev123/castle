@@ -1,0 +1,15 @@
+{% load sitetree %}
+{%for item in sitetree_items %}
+<li {%if item.has_children %} class="dropdown" {%endif%}>
+    <a href="{% sitetree_url for item %}" class="dropdown-toggle" data-toggle="dropdown">{{ item.title_resolved }} </a>
+      <ul class="dropdown-menu animated fadeOut" style="display: none; opacity: 1;">
+
+       {% if item.has_children %}
+          {% sitetree_children of item for menu template 'navigation/nav-item.html'%}
+       {% endif %}
+     
+      </ul>
+  </li>
+
+
+{%endfor%}

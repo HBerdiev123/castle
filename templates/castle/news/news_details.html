@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load post_tags %}
+{% load sitetree %}
+{% block content %}
+  <!-- Page Banner Start-->
+  <section class="page-banner padding">
+     <div class="container">
+        <div class="row">
+           <div class="col-md-12 text-center">
+              <h1 class="text-uppercase">Blog</h1>
+              <p>Serving you since 1999. Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+              <ol class="breadcrumb text-center">
+                 <li><a href="#">Home</a></li>
+                 <li><a href="#">Properties</a></li>
+                 <li class="active">Blog</li>
+              </ol>
+           </div>
+        </div>
+     </div>
+    {# {% sitetree_breadcrumbs from "menu" template 'breadcrumbs.html' %} #}
+
+  </section>
+
+  <!-- Page Banner End -->
+
+  <!-- News Details Start -->
+  <section id="news-section-1" class="news-section-details property-details padding_top">
+    <div class="container">  
+      <div class="row heading_space">
+        <div class="col-md-8">
+        	<div class="row">
+          	<div class="news-1-box clearfix">
+              	<div class="col-md-12 col-sm-12 col-xs-12">
+                  	<img src="{{post.post_image.url}}" alt="image" class="img-responsive"/>
+                </div>         
+                <div class="col-md-12 col-sm-12 col-xs-12 top30">
+                	<div class="news-details bottom10">
+                    	<span><i class="icon-icons230"></i> {%trans "by" %} {{post.author}}</span>
+                		  <span><i class="icon-icons228"></i> {{post.created|date:"M d, Y"}}</span>
+                  </div>        
+                  <h3>{{post.title}}</h3>
+                   {{post.body|safe}}
+                </div>
+            </div>
+          </div>
+           
+
+          <div class="row heading_space">
+            <div class="news-2-tag">
+            <div class="col-md-5 col-sm-5 col-xs-12 top15">
+              <h4>{% trans "Tags" %}:</h4>
+              <p class="p-font-15">
+                {% for tag in post.tags.all %}
+                  {% if not forloop.last %}
+                    <a href="{% url 'news:post_list_by_tag' tag.slug %}">{{tag}}</a>,
+                  {% else %} 
+                    <a href="{% url 'news:post_list_by_tag' tag.slug %}">{{tag}}</a>
+                  {% endif %}
+                {% endfor %}
+              </p>
+            </div>
+            
+              <div class="col-md-7 col-sm-7 col-xs-12 text-right">
+                <div class="social-icons">
+                  <h4>Share:</h4>
+                  <ul class="social_share">
+                      <li><a href="#." class="facebook"><i class="icon-facebook-1"></i></a></li>
+                      <li><a href="#." class="twitter"><i class="icon-twitter-1"></i></a></li>
+                      <li><a href="#." class="google"><i class="icon-google4"></i></a></li>
+                      <li><a href="#." class="linkden"><i class="fa fa-linkedin"></i></a></li>
+                      <li><a href="#." class="vimo"><i class="icon-vimeo3"></i></a></li>
+                   </ul>
+                </div>
+              </div>
+            </div>
+                  
+         </div>
+         
+            <div class="row">
+            	<div class="col-md-12 bottom20">
+                	<h2 class="text-uppercase">{% trans "Similar Posts" %}</h2>
+              </div>
+                {% for sp in similar_posts %}
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  	<div class="sim-lar-p">
+                      	<img src="{{sp.post_image.url}}" style="width:364px; height:308px" alt="image">
+                          <div class="sim-lar-text top10">
+                          	<h3 class="bottom10"><a href="{% url 'news:detail' sp.slug %}">{{sp.title}}</a></h3>
+                              <p class="bottom10">
+                                <span>{% trans "By" %}:</span> {{sp.author}} <span>|</span> <span>{% trans "Date" %}:</span> {{sp.created|date:"M d, yy"}}</p>
+                              <p class="bottom20">{{sp.body|safe|truncatewords_html:24}}</p>
+                              
+                                <a href="{% url 'news:detail' sp.slug %}" class="btn-more">
+                                    <i>
+                                      <img src="{% static 'images/arrowl.png' %}" alt="arrow">
+                                    </i>
+                                    <span>{% trans "More Detail" %}</span>
+                                    <i><img src="{% static 'images/arrowr.png' %}" alt="arrow"></i>
+                                </a>
+                            </div>
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+          </div>
+        
+        <aside class="col-md-4 col-xs-12">
+          <form class="form-search" method="post" id="news-search" action="{% url 'news:search' %}">
+            <div class="input-append">
+                {% csrf_token %}
+                <input type="text" class="input-medium search-query" placeholder="Search Here" value="" name="query">
+                <button type="submit" class="add-on"><i class="icon-icons185"></i></button>
+            </div>
+          </form>
+
+          <h3 class="bottom20 margin40">{% trans "Categories" %}</h3>
+         
+          {% show_categories %}
+
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="bottom40 margin40">Recent Properties</h3>
+            </div>
+          </div>
+         
+          <div class="row padding-t-55">
+            <div class="col-md-12 padding-b-20">
+              <h3 class="bottom30 margin30">Tags</h3>
+            </div>
+            
+            <div class="col-md-12">
+            	{% with tags=post.tags.all %}
+                {% for tag in tags %}
+                  {% if forloop.first %}
+                    <div class="news-tag">
+                  {% elif forloop.counter|divisibleby:"3" %}
+                    </div>
+                    <div class="news-tag">
+                   {% endif %}    
+                  	  <a href="{% url 'news:post_list_by_tag' tag.slug %}">{{tag}}</a>
+                  {% endfor %}
+                </div>
+               {% endwith %}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="margin40 bottom20">Featured Properties</h3>
+            </div>
+            <div class="col-md-12">
+              <div id="agent-2-slider" class="owl-carousel">
+                <div class="item">
+                  <div class="property_item heading_space">
+                    <div class="image">
+                      <a href="#"><img src="{% static 'images/slider-list2.jpg' %}" alt="listin" class="img-responsive"></a>
+                      <div class="feature"><span class="tag-2">For Rent</span></div>
+                      <div class="price clearfix"><span class="tag pull-right">$8,600 Per Month - <small>Family Home</small></span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="property_item heading_space">
+                    <div class="image">
+                      <a href="#"><img src="{% static 'images/slider-list2.jpg' %}" alt="listin" class="img-responsive"></a>
+                      <div class="feature"><span class="tag-2">For Rent</span></div>
+                      <div class="price clearfix"><span class="tag pull-right">$8,600 Per Month - <small>Family Home</small></span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+                      
+      </div>
+                
+    </div>
+  </section>
+  <!-- News Details End --> 
+
+{%endblock%}
+
+
+
+
+

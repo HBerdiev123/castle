@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+     {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li class="{{ message.tags }}">
+              <div class="alert alert-{% if message.tags == 'error'%}danger{% else %}{{message.tags}} {% endif %}  alert-dismissable">
+                <a class="panel-close close" data-dismiss="alert">×</a> 
+                <i class="fa fa-coffee"></i>
+                {{ message|safe }}
+              </div>
+              </li>
+            {% endfor %}
+          </ul>
+      {% endif %}
+  
+
+  <!-- Profile Start -->
+  <section id="agent-2-peperty" class="profile padding">
+
+    {% include 'profile/profile-menu.html' %}
+    
+
+    <div class="container-3">
+     <div class="mainbody container-fluid">
+    <div class="row">
+        <div style="padding-top:20px;"> </div>
+        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <div class="panel panel-default">
+
+              {% with user=profile.user %}
+                <div class="panel-body">
+                    <div class="media">
+                        <div align="center">
+                            <img class="thumbnail img-responsive" src="
+                            {% if profile.photo %}{{profile.photo.url}}{% else %} {% static 'images/profile_photo.jpg' %}{% endif %}" width="300px" height="300px">
+                        </div>
+                        <div class="media-body">
+                            <hr>
+                            <h5><strong>Profile</strong></h5>
+                            <p>{{user.username}}</p>
+                            <hr>
+                            <h5><strong>Date of Birth</strong></h5>
+                            <p>{{profile.date_of_birth}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endwith %}
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <span>
+                        <h1 class="panel-title pull-left" style="font-size:30px;">{{user.first_name|capfirst}} {{user.last_name}}<small> {{user.email}}</small> <i class="fa fa-check text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="{{user.first_name}} is sharing with you"></i></h1>
+                        <div class="dropdown pull-right">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <i class="fa fa-cog" aria-hidden="true"></i> 
+                                 <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="{% url 'profile:edit' %}">Edit Profile</a></li>
+                                <li><a href="#">Change Password</a></li>
+                            </ul>
+                        </div>
+                    </span>
+                    <br><br>
+                    <i class="fa fa-tags" aria-hidden="true"></i> {{profile.mobile}}
+                    <br><br><hr>
+                    
+                    <div class="post-content" wfd-id="76">
+                        {{profile.about}}
+                    </div>
+                    <hr>
+                    <span class="pull-left">
+                        <a href="{% url 'profile:favorites' %}" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-heart" aria-hidden="true"></i> Favorities <span class="badge">{{profile.my_favorities.count}}</span></a>
+                    </span>
+
+
+                    <span class="pull-right">
+                        <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-lg fa-at" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Mention"></i></a>
+                        <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-lg fa-envelope-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Message"></i></a>
+                        <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-lg fa-ban" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Ignore"></i></a>
+                    </span>
+                </div>
+            </div>
+            <hr>
+
+        </div>
+    </div>
+</div>
+    </div>
+
+  </section>
+  <!-- Profile end -->
+
+{% endblock %}

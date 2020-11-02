@@ -1,0 +1,52 @@
+from django.contrib import admin
+from .models import Picture, Feature, PropertyCategory, Property
+
+
+@admin.register(Feature)
+class FeatureAdmin(admin.ModelAdmin):
+	list_display = ('title', 'created')
+	list_filter = ('title', 'created')
+	search_fields = ('title', 'created', 'description')
+	# raw_id_fields = ('title',)
+	date_hierarchy = 'created'
+	ordering = ('title', 'created')
+
+@admin.register(PropertyCategory)
+class PropertyCategoryAdmin(admin.ModelAdmin):
+	list_display = ('title', 'created')
+	list_filter = ('title', 'created')
+	search_fields = ('title', 'created', 'description')
+	# raw_id_fields = ('title',)
+	date_hierarchy = 'created'
+	ordering = ('title', 'created')
+
+
+class PropertyInline(admin.StackedInline):
+	model = Property
+
+class ImagesInline(admin.StackedInline):
+	model = Picture
+	extra = 6
+
+
+from django.forms import CheckboxSelectMultiple
+from django.db import models
+
+class PropertyAdmin(admin.ModelAdmin):
+	formfield_overrides = {
+		models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+		}
+	inlines = [ImagesInline]	
+  
+admin.site.register(Property, PropertyAdmin)
+
+
+
+@admin.register(Picture)
+class PictureAdmin(admin.ModelAdmin):
+	list_display = ('title', 'created_at')
+	list_filter = ('title', 'created_at')
+	search_fields = ('title', 'created_at', 'description')
+	# raw_id_fields = ('title',)
+	date_hierarchy = 'created_at'
+	ordering = ('title', 'created_at')

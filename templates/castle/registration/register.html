@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+
+	<div class="container p-3 my-3 border">
+		<form class="form-signin" method="POST" style="width: 100%; max-width: 420px; padding: 15px; margin: auto;" wfd-id="1">
+			{{ user_form.non_field_errors }}
+
+		  <div class="text-center mb-4" wfd-id="8">
+		    <h1 class="h3 mb-3 font-weight-normal">Create an account</h1>
+		  </div>
+
+		  <div class="form-group">
+		  		{% if user_form.username.errors %}
+				  	<div class="alert alert-danger" role="alert">
+					    <ol>
+					    {% for error in user_form.username.errors %}
+					        <li><strong>{{ error|escape }}</strong></li>
+					    {% endfor %}
+					    </ol>
+					</div>
+				{% endif %}
+		    <input type="text" name="username"  class="form-control" autocomplete="current-password" autofocus="" required="" id="id_old_password" placeholder="Username">
+		</div>
+	  
+		  <div class="form-group">
+		  	{{ user_form.first_name.errors }}
+		    <input type="text" name="first_name" placeholder="First Name" class="form-control" required="" id="id_first_name">
+		  </div>
+
+		   <div class="form-group">
+		  		{% if user_form.email.errors %}
+				  	<div class="alert alert-danger" role="alert">
+					    <ol>
+					    {% for error in user_form.email.errors %}
+					        <li><strong>{{ error|escape }}</strong></li>
+					    {% endfor %}
+					    </ol>
+					</div>
+				{% endif %}
+		    <input type="email" name="email" placeholder="Email" class="form-control" required="" id="id_email">
+		  </div>
+
+		  <div class="form-group">
+		  	{{ user_form.password.errors }}
+		  	<input type="password" name="password" class="form-control" placeholder="Password confirmation" autocomplete="new-password" required="" id="id_password">
+		  </div>
+
+		   <div class="form-group">
+			  	{% if user_form.password2.errors %}
+				  	<div class="alert alert-danger" role="alert">
+					    <ol>
+					    {% for error in user_form.password2.errors %}
+					        <li><strong>{{ error|escape }}</strong></li>
+					    {% endfor %}
+					    </ol>
+					</div>
+				{% endif %}
+		  	<input type="password" name="password2" class="form-control" placeholder="Repeat password" autocomplete="new-password" required="" id="id_password2">
+		  </div>
+		 
+		{% csrf_token %}
+		  <div class="form-group">
+			  <button class="btn btn-lg btn-primary btn-block" type="submit" wfd-id="12"> Create Account</button>
+		  </div>
+		  
+		  <div class="form-group">
+			  <p class="mt-5 mb-3 text-muted text-center">© 2017-2020</p>
+		  </div>	
+
+		</form>
+		
+	</div>
+	
+{% endblock %}

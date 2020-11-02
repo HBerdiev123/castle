@@ -1,0 +1,64 @@
+{% load static %}
+
+<header class="layout_default">
+  <div class="topbar grey">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <p>We are Best in Town With 40 years of Experience.</p>
+        </div>
+        <div class="col-md-7 text-right">
+          <ul class="breadcrumb_top text-right">
+            <li><a href="favorite_properties.html"><i class="icon-icons43"></i>Favorites</a></li>
+            <li><a href="submit_property.html"><i class="icon-icons215"></i>Submit Property</a></li>
+            <li><a href="my_properties.html"><i class="icon-icons215"></i>My Property</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url "account:profile" %}"><i class="icon-icons230"></i>{{request.user.username}}</a></li>{% endif %}
+                <li>
+                  <a href="{% if request.user.is_authenticated %}{% url 'account_logout' %}{% else %}/accounts/login{% endif %}">
+                    <i class="icon-icons179"></i>
+                      {% if request.user.is_authenticated %}Logout{% else %}Login/Register{% endif %}</a>
+                </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-upper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <div class="logo"><a href="index3.html"><img alt="" src="{% static 'images/logo.png' %}"></a></div>
+        </div>
+        <!--Info Box-->
+        <div class="col-md-9 col-sm-12 right">
+          <div class="info-box first">
+            <div class="icons"><i class="icon-telephone114"></i></div>
+            <ul>
+              <li><strong>Phone Number</strong></li>
+              <li>+1 900 234 567 - 68</li>
+            </ul>
+          </div>
+          <div class="info-box">
+            <div class="icons"><i class="icon-icons74"></i></div>
+            <ul>
+              <li><strong>Manhattan Hall,</strong></li>
+              <li>Castle Melbourne, australia</li>
+            </ul>
+          </div>
+          <div class="info-box">
+            <div class="icons"><i class="icon-icons142"></i></div>
+            <ul>
+              <li><strong>Email Address</strong></li>
+              <li><a href="javascript:void(0)">info@castle.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% include 'navigation/nav.html' %}
+
+</header>
