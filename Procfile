@@ -1,1 +1,1 @@
-web: gunicorn castel.wsgi
+web: gunicorn castle.wsgi
