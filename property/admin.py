@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Picture, Feature, PropertyCategory, Property
+from .models import Picture, Feature, PropertyCategory, Property, FeaturedProperties
 
 
 @admin.register(Feature)
@@ -50,3 +50,11 @@ class PictureAdmin(admin.ModelAdmin):
 	# raw_id_fields = ('title',)
 	date_hierarchy = 'created_at'
 	ordering = ('title', 'created_at')
+
+
+@admin.register(FeaturedProperties)
+class FeaturedPropertyAdmin(admin.ModelAdmin):
+	list_display  = ('prop', 'is_active', 'created_at')
+	list_filter   = ('is_active', 'created_at')	
+	date_hierarchy='created_at'
+	ordering      = ('updated_at', 'created_at')
