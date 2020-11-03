@@ -155,7 +155,7 @@ class Picture(models.Model):
 		# return self.title
 
 class FeaturedProperties(models.Model):
-	prop   		= models.ForeignKey(Property, on_delete=models.CASCADE, related_name='featured')
-	active 		= models.BooleanField(default=True)
+	prop   		= models.ForeignKey(Property, on_delete=models.CASCADE, related_name='featured_prop')
+	is_active 	= models.BooleanField(default=True)
 	created_at  = models.DateTimeField(auto_now_add=True)
 	updated_at  = models.DateTimeField(auto_now=True) 

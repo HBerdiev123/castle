@@ -54,7 +54,12 @@ def register(request):
 
 @login_required
 def profile(request):
-	profile = get_object_or_404(Profile, user=request.user)
+	try:
+		profile = Profile.objects.get(user=request.user)
+	except Profile.DoesNotExist:
+		profile = Profile.objects.create(user=request.user)
+		messages.info(request, 'You have not filled your account data!')
+
 	return render(request, 'profile/profile.html', {'profile':profile})
 
 @login_required
