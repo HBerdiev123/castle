@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load i18n %}
+{% load property_tags %}
 {% block content %}
 
   <!-- Page Banner Start-->
@@ -91,71 +92,13 @@
                     </ul>
                  </div>
               </div>
-              <div class="row">
-                 <div class="col-md-12">
-                    <h3 class="bottom40 margin40">Featured Properties</h3>
-                 </div>
-              </div>
-              <div class="row">
-                 <div class="col-md-4 col-sm-4 col-xs-12 p-image image bottom20">
-                    <img src="{% static 'images/f-p-1.png' %}" alt="image"/>
-                 </div>
-                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div class="feature-p-text">
-                       <h4><a href="#.">Get the best property in Town by our agent</a></h4>
-                       <span>by Martin Moore</span>
-                    </div>
-                 </div>
-              </div>
-              <div class="row padding-b-30 padding-t-30">
-                 <div class="col-md-4 col-sm-4 col-xs-12 p-image image bottom20">
-                    <img src="{% static 'images/f-p-1.png' %}" alt="image"/>
-                 </div>
-                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div class="feature-p-text">
-                       <h4><a href="#.">Get the best property in Town by our agent</a></h4>
-                       <span>by Martin Moore</span>
-                    </div>
-                 </div>
-              </div>
-              <div class="row">
-                 <div class="col-md-4 col-sm-4 col-xs-12 p-image image">
-                    <img src="{% static 'images/f-p-1.png' %}" alt="image"/>
-                 </div>
-                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div class="feature-p-text">
-                       <h4><a href="#.">Get the best property in Town by our agent</a></h4>
-                       <span>by Martin Moore</span>
-                    </div>
-                 </div>
-              </div>
-              <div class="row">
-                 <div class="col-md-12">
-                    <h3 class="margin40 bottom20">Featured Properties</h3>
-                 </div>
-                 <div class="col-md-12 padding-t-30">
-                    <div id="agent-2-slider" class="owl-carousel">
-                       <div class="item">
-                          <div class="property_item heading_space">
-                             <div class="image">
-                                <a href="#."><img src="{% static 'images/slider-list2.jpg' %}" alt="listin" class="img-responsive"></a>
-                                <div class="feature"><span class="tag-2">For Rent</span></div>
-                                <div class="price clearfix"><span class="tag pull-right">$8,600 Per Month - <small>Family Home</small></span></div>
-                             </div>
-                          </div>
-                       </div>
-                       <div class="item">
-                          <div class="property_item heading_space">
-                             <div class="image">
-                                <a href="#."><img src="{% static 'images/slider-list2.jpg' %}" alt="listin" class="img-responsive"></a>
-                                <div class="feature"><span class="tag-2">For Rent</span></div>
-                                <div class="price clearfix"><span class="tag pull-right">$8,600 Per Month - <small>Family Home</small></span></div>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-              </div>
+           
+
+
+
+              {% featured %}
+   
+
            </aside>
         </div>
      </div>

@@ -1,0 +1,23 @@
+ {% load static %}
+ {% load i18n %}
+ 
+  <div class="col-md-12">
+      <h3 class="margin40 bottom20">{% trans "Featured Properties" %}</h3>
+  </div>
+  <div class="col-md-12">
+  <div id="agent-2-slider" class="owl-carousel">
+    {% for fet in featured %}
+      <div class="item">
+        <div class="property_item heading_space">
+          <div class="image">
+            <a href="#"><img src="{% static 'images/slider-list2.jpg' %}" alt="listin" class="img-responsive"></a>
+            <div class="feature"><span class="tag-2">{% trans "For" %} {% ifequal fet.prop.purpose 0 %}{%trans "Rent" %}{% else %}{% trans "Sale" %} {% endifequal %}</span></div>
+            <div class="price clearfix"><span class="tag pull-right">{{fet.prop.price}} Per Month - <small>{{fet.prop.short_description}}</small></span></div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    
+
+    </div>
+  </div> 

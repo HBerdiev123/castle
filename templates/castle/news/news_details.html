@@ -2,6 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% load post_tags %}
+{% load property_tags %}
 {% load sitetree %}
 {% block content %}
   <!-- Page Banner Start-->
@@ -146,33 +147,14 @@
             </div>
           </div>
 
+
+ 
           <div class="row">
-            <div class="col-md-12">
-              <h3 class="margin40 bottom20">Featured Properties</h3>
-            </div>
-            <div class="col-md-12">
-              <div id="agent-2-slider" class="owl-carousel">
-                <div class="item">
-                  <div class="property_item heading_space">
-                    <div class="image">
-                      <a href="#"><img src="{% static 'images/slider-list2.jpg' %}" alt="listin" class="img-responsive"></a>
-                      <div class="feature"><span class="tag-2">For Rent</span></div>
-                      <div class="price clearfix"><span class="tag pull-right">$8,600 Per Month - <small>Family Home</small></span></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="property_item heading_space">
-                    <div class="image">
-                      <a href="#"><img src="{% static 'images/slider-list2.jpg' %}" alt="listin" class="img-responsive"></a>
-                      <div class="feature"><span class="tag-2">For Rent</span></div>
-                      <div class="price clearfix"><span class="tag pull-right">$8,600 Per Month - <small>Family Home</small></span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           {% featured %}
           </div>
+
+
+
         </aside>
                       
       </div>

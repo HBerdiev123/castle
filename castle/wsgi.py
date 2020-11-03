@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/3.0/howto/deployment/wsgi/
 """
 
 import os
-import django_heroku
+
 
 from django.core.wsgi import get_wsgi_application
 
