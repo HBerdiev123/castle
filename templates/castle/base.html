@@ -1,5 +1,7 @@
 {% load static %}
 {% load meta %}
+{% load django_simple_cookie_consent_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head {% meta_namespaces %}>
@@ -22,6 +24,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/range-Slider.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
 	<link rel="icon" href="{% static 'images/icon.png' %}">
+	{% display_cookie_consent %}
+
 </head>
 
 <body>
