@@ -13,7 +13,12 @@ def detail(request, slug):
 	similar_posts= Post.published.filter(tags__in=post_tag_ids).exclude(id=post.id)
 	similar_posts= similar_posts.annotate(same_tags=Count('tags'))\
 	.order_by('-same_tags', '-publish')[:3]
-	return render(request,'news/news_details.html',{'post':post, 'similar_posts':similar_posts})
+	context = {}
+	context['post'] = post 
+	context['similar_posts'] = similar_posts
+	context['meta'] = post.as_meta()
+
+	return render(request,'news/news_details.html', context)
 
 
 def list(request, tag_slug=None, cat_slug=None):

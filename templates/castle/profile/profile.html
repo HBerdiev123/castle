@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
+{% block page_title %}
+  <title>
+    {% trans "Profile" %}: {{request.user.username}}
+  </title>
+{% endblock %}
 {% block content %}
 
 

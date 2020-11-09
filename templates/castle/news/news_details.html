@@ -4,6 +4,11 @@
 {% load post_tags %}
 {% load property_tags %}
 {% load sitetree %}
+{% block page_title %}
+  <title>
+    {{post.title}}
+  </title>
+{% endblock %}
 {% block content %}
   <!-- Page Banner Start-->
   <section class="page-banner padding">

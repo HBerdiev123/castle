@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+{%load i18n %}
+{% block page_title %}
+  <title>
+    {% trans "Edit Profile" %}: {{request.user.username}}
+  </title>
+{% endblock %}
 {% block content %}
   
   <!-- Profile Start -->

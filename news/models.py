@@ -4,12 +4,10 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
-
+from meta.models import ModelMeta
 from django.urls import reverse
 
 # Create your models here.
-
-
 
 class PublishedManager(models.Manager):
 	def get_queryset(self):
@@ -25,7 +23,7 @@ class Category(models.Model):
 	def __str__(self):
 		return self.category_name
 
-class Post(models.Model):
+class Post(ModelMeta, models.Model):
 	STATUS_CHOICES = (
 			('draft','Draft'),
 			('published','Published'),
@@ -50,6 +48,20 @@ class Post(models.Model):
 	class Meta:
 		ordering = ('-publish',)
 
+
+
+	_metadata = {
+		'title':'title',
+		'description':'body',
+		'image':'get_meta_image',
+	}
+
+
+	def get_meta_image(self):
+		if self.post_image:
+			print(self.post_image.url)
+			return self.post_image.url
+			
 	def __str__(self):
 		return self.title
 
