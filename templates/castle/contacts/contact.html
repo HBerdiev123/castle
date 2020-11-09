@@ -1,6 +1,24 @@
 {% extends 'base.html' %}
-
+{% block page_title %}
+  <title>
+    Castle - Contacts
+  </title>
+{% endblock %}
 {% block content %}
+
+  {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">
+          <div class="alert alert-{% if message.tags == 'error'%}danger{% else %}{{message.tags}} {% endif %}  alert-dismissable">
+            <a class="panel-close close" data-dismiss="alert">×</a> 
+            <i class="fa fa-coffee"></i>
+            {{ message|safe }}
+          </div>
+          </li>
+        {% endfor %}
+      </ul>
+  {% endif %}
   <!--Contact-->
   <section id="contact-us">
     <div class="contact">
@@ -42,22 +60,37 @@
                       </div>
                       
                       <div class="row">
-                        <form action="#" class="callus">
+         
+                        <form class="callus" method="post">
+                             {% if form.errors %}
+                               {% for field in form %}
+                                   {% for error in field.errors %} 
+                                      <div class="alert alert-danger">
+                                           <strong>{{ error|escape }}</strong>
+                                      </div>
+                                   {% endfor %}
+                               {% endfor %}
+                            {% endif %}
+
+                        
                           <div class="col-md-12">
                             <div class="single-query form-group">
-                              <input type="text" placeholder="Your Name" class="keyword-input">
+                              <label>{{form.sender.error}}</label>
+                              <input type="text" name="sender" placeholder="Your Name" required class="keyword-input">
                               </div>
                               <div class="single-query form-group">
-                              <input type="text" placeholder="Phone Number" class="keyword-input">
+                              <input type="text" placeholder="Phone Number" name="phone_number" class="keyword-input">
                             </div>
                             <div class="single-query form-group">
-                              <input type="text" placeholder="Email Adress" class="keyword-input">
+                              <input type="email" required placeholder="Email Adress" name="email" class="keyword-input">
                             </div>
                             <div class="single-query form-group">
-                              <textarea placeholder="Massege" class="form-control"></textarea>
+                              <textarea placeholder="Massege" required name="message" class="form-control"></textarea>
                             </div>
+                            {% csrf_token %}
                             <input type="submit" action="send-mail" value="submit now" class="btn-blue">
                             </div>
+                          
                         </form>
                         
                       </div>

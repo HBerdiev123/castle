@@ -23,15 +23,16 @@ from rentals import urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     url('^$', views.home, name='home'),
-    url('^contacts$', views.contacts, name='contacts'),
+    # url('^contacts$', views.contacts, name='contacts'),
     url(r'^rentals/', include('rentals.urls')),
     url(r'^news/',    include('news.urls', namespace="news")),
     url(r'^404$',views.error_404, name='error_404'),
     url(r'^faq/$', views.faq, name='faq'),
     # path('profile/', include('profiles.urls', namespace="profile")),
     path('account/',  include('account.urls', namespace='account')),
-    path('profile/',     include('profiles.urls', namespace='profile')),
+    path('profile/',  include('profiles.urls', namespace='profile')),
     path('accounts/', include('allauth.urls')),
+    path('contacts/', include('contacts.urls', namespace='contacts')),
     url(r'$send/$', views.send_mail, name="send-mail" ),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 
