@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse, HttpResponseRedirect
+from additions.models  import FAQ
 
 
 def home(request):
@@ -10,7 +11,10 @@ def contacts(request):
 	return render(request, 'contacts/contact.html',{})
 
 def faq(request):
-	return render(request, 'faq/faq.html')
+	# faq = FAQ.objects.filter(is_active=True)
+	faq = FAQ.objects.all()
+	print('faq')
+	return render(request, 'faq/faq.html', {'faq':faq})
 
 def error_404(request):
 	return render(request, 'errors/404.html')

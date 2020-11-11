@@ -33,6 +33,7 @@ urlpatterns = [
     path('profile/',  include('profiles.urls', namespace='profile')),
     path('accounts/', include('allauth.urls')),
     path('contacts/', include('contacts.urls', namespace='contacts')),
+    path('additions/', include('additions.urls', namespace='additions')),
     url(r'$send/$', views.send_mail, name="send-mail" ),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 
