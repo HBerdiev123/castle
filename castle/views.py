@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from additions.models  import FAQ
+# from django.templates import RequestContext
 
 
 def home(request):
@@ -22,6 +23,17 @@ def error_404(request):
 def faq(request):
 	return render(request,'faq/faq.html')
 
+def handler404(request, exception):
+	# response = render_to_response('404.html', context_instance = RequestContext(request))
+	# response.status_code=404
+	# response = render(request, '404.html', {})
+	# response.status_code = 404
+	return render(request, '404.html', {})
+
+def handler500(request, *args, **kwargs):
+	# response = render_to_response('500.html', context_instance = RequestContext(request))
+	# response.status_code=500
+	return render(request, '500.html', {})
 
 
 def send_mail(request):

@@ -14,7 +14,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from django.conf.urls import url, include
+from django.conf.urls import url, include, handler400, handler500
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
@@ -26,14 +26,14 @@ urlpatterns = [
     # url('^contacts$', views.contacts, name='contacts'),
     url(r'^rentals/', include('rentals.urls')),
     url(r'^news/',    include('news.urls', namespace="news")),
-    url(r'^404$',views.error_404, name='error_404'),
+    # url(r'^404$',views.error_404, name='error_404'),
     url(r'^faq/$', views.faq, name='faq'),
     # path('profile/', include('profiles.urls', namespace="profile")),
     path('account/',  include('account.urls', namespace='account')),
     path('profile/',  include('profiles.urls', namespace='profile')),
     path('accounts/', include('allauth.urls')),
     path('contacts/', include('contacts.urls', namespace='contacts')),
-    path('additions/', include('additions.urls', namespace='additions')),
+    # path('additions/', include('additions.urls', namespace='additions')),
     url(r'$send/$', views.send_mail, name="send-mail" ),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 
@@ -41,3 +41,6 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'castle.views.handler404'
+handler500 = 'castle.views.handler500'
