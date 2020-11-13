@@ -27,11 +27,10 @@ META_SITE_DOMAIN = True
 SECRET_KEY = 'l#y!q1w6v&0i$%&^34%(1aosewv%qew$@t1%))e33-+xk=wxd$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# if DEBUG is True:
-    # ALLOWED_HOSTS = ['castle787.herokuapp.com']
+DEBUG = False    
+ALLOWED_HOSTS = ['castle787.herokuapp.com']
 # if DEBUG is False:
-ALLOWED_HOSTS = ['']
+# ALLOWED_HOSTS = ['']
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
