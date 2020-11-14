@@ -25,6 +25,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/range-Slider.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
 	<link rel="icon" href="{% static 'images/icon.png' %}">
+	{% block add_styles %}
+	{% endblock %}
 	{% display_cookie_consent %}
 
 </head>
