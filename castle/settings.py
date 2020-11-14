@@ -16,9 +16,9 @@ import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE_PROTOCOL =  True
-META_SITE_PROTOCOL = 'http'
-META_SITE_DOMAIN = True
+# SITE_PROTOCOL =  True
+# META_SITE_PROTOCOL = 'http'
+# META_SITE_DOMAIN = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -27,10 +27,10 @@ META_SITE_DOMAIN = True
 SECRET_KEY = 'l#y!q1w6v&0i$%&^34%(1aosewv%qew$@t1%))e33-+xk=wxd$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True    
-ALLOWED_HOSTS = ['castle787.herokuapp.com']
+DEBUG = False    
+# ALLOWED_HOSTS = ['castle787.herokuapp.com']
 # if DEBUG is False:
-# ALLOWED_HOSTS = ['']
+ALLOWED_HOSTS = ['*']
 
 SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = False
