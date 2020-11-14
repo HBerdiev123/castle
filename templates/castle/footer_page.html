@@ -1,12 +1,116 @@
 {%load static %}
-<footer class="padding_top footer2">
-  <div class="container">
+
+<!--Footer-->
+<footer class="footer_third">
+  <div class="container contacts">
+    <div class="row">
+      <div class="col-sm-4 text-center">
+        <div class="info-box first">
+          <div class="icons"><i class="icon-telephone114"></i></div>
+          <ul class="text-center">
+            <li><strong>Phone Number</strong></li>
+            <li>+1 900 234 567 - 68</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-4 text-center">
+        <div class="info-box">
+          <div class="icons"><i class="icon-icons74"></i></div>
+          <ul class="text-center">
+            <li><strong>Manhattan Hall,</strong></li>
+            <li>Castle Melbourne, australia</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-4 text-center">
+        <div class="info-box">
+          <div class="icons"><i class="icon-icons142"></i></div>
+          <ul class="text-center">
+            <li><strong>Email Address</strong></li>
+            <li><a href="#.">info@castle.com</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container padding_top">
     <div class="row">
       <div class="col-md-3 col-sm-6">
         <div class="footer_panel bottom30">
           <a href="#." class="logo bottom30"><img src="{% static 'images/logo-white.png' %}" alt="logo"></a>
-
+          <p class="bottom15">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
+            tempor cum consectetuer 
+            adipiscing.
+          </p>
           <p class="bottom15">If you are interested in castle do not wait and <a href="#.">BUY IT NOW!</a></p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="footer_panel bottom30">
+          <h4 class="bottom30 heading">Search by Area</h4>
+          <table style="width:100%;">
+            <tbody>
+              <tr>
+                <td>
+                  <ul class="links">
+                    <li><a href="#."><i></i>About</a></li>
+                    <li class="active"><a href="#."><i></i>News</a></li>
+                    <li><a href="#."> <i></i>Contacts</a></li>
+                    <li><a href="#."><i></i>Testimonials</a></li>
+                    <li><a href="#."><i></i>Typography</a></li>
+                  </ul>
+                </td>
+                <td class="text-right">
+                  <ul class="links text-left">
+                    <li><a href="#."><i></i>Services</a></li>
+                    <li class="active"><a href="#."><i></i>Careers</a></li>
+                    <li><a href="#."><i></i>Our team</a></li>
+                    <li><a href="#."><i></i>Shop</a></li>
+                    <li><a href="#."><i></i>Our approach</a></li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="footer_panel bottom30">
+          <h4 class="bottom30 heading">Latest News</h4>
+          <div class="media bottom30">
+            <div class="media-body">
+              <a href="#.">Nearest mall in high tech Goes google map your villa</a>
+              <span><i class="icon-clock5"></i>Feb 22, 2017</span>
+            </div>
+          </div>
+          <div class="media">
+            <div class="media-body">
+              <a href="#.">Nearest mall in high tech Goes google map your villa</a>
+              <span><i class="icon-clock5"></i>Feb 22, 2017</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="footer_panel bottom30">
+          <h4 class="bottom30 heading">Subscribe</h4>
+          <p>Sign up with your email to get latest updates and offers</p>
+          <form class="top30">
+            <input class="search" placeholder="Enter your Email" type="search">
+            <a class="button_s" href="#">
+            <i class="icon-mail-envelope-open"></i>
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--CopyRight-->
+    <div class="copyright_simple">
+      <div class="row">
+        <div class="col-md-6 col-sm-5 top20 bottom20">
+          <p>Copyright &copy; 2017 <span>Castle</span>. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 col-sm-7 text-right top15 bottom10">
           <ul class="social_share">
             <li><a href="#." class="facebook"><i class="icon-facebook-1"></i></a></li>
             <li><a href="#." class="twitter"><i class="icon-twitter-1"></i></a></li>
@@ -16,73 +120,12 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-3 col-sm-6">
-        <div class="footer_panel bottom30">
-          <h4 class="bottom30">Services</h4>
-          <ul class="area_search">
-            <li><a href="#."></i>Mortgage</a></li>
-            <li class="active"><a href="#.">Remote purchase</a></li>
-            <li class="active"><a href="#.">Tours of the new buildings</a></li>
-            <li class="active"><a href="#.">Exchange of apartments for new buildings</a></li>
-        
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <div class="footer_panel bottom30">
-          <h4 class="bottom30">Catalog of new buildings</h4>
-          <div class="media">
-            <a class="media-object"><img src="{% static 'images/footer-news1.png' %}" alt="news"></a>
-            <div class="media-body">
-              <a href="#.">Nearest mall in high tech Goes your villa</a>
-              <span><i class="icon-clock4"></i>Feb 22, 2017</span>
-            </div>
-          </div>
-          <div class="media">
-            <a class="media-object"><img src="{% static 'images/footer-news1.png' %}" alt="news"></a>
-            <div class="media-body">
-              <a href="#.">Nearest mall in high tech Goes your villa</a>
-              <span><i class="icon-clock4"></i>Feb 22, 2017</span>
-            </div>
-          </div>
-          <div class="media">
-            <a class="media-object"><img src="{% static 'images/footer-news1.png' %}" alt="news"></a>
-            <div class="media-body">
-              <a href="#.">Nearest mall in high tech Goes your villa</a>
-              <span><i class="icon-clock4"></i>Feb 22, 2017</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <div class="footer_panel bottom30">
-          <h4 class="bottom30">Get in Touch</h4>
-          <ul class="getin_touch">
-            <li><i class="icon-telephone114"></i>01 900 234 567 - 68</li>
-            <li><a href="#."><i class="icon-icons142"></i>info@castle.com</a></li>
-            <li><a href="#."><i class="icon-browser2"></i>www.castle.com</a></li>
-            <li><i class="icon-icons74"></i>Castle Melbourne, Merrick Way,FL 12345 australia</li>
-          </ul>
-        </div>
-      </div>
     </div>
   </div>
 </footer>
-<!--CopyRight-->
-<div class="copyright index2">
-  <div class="copyright_inner">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-7">
-          <p>Copyright &copy; 2017 <span>Castle</span>. All rights reserved.</p>
-        </div>
-        <div class="col-md-5 text-right">
-          <p>Designed by <a href="#.">Brighthemes</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+  
 <script src="{% static 'js/jquery-2.1.4.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script> 
 <script src="{% static 'js/bootsnav.js' %}"></script>
