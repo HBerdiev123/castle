@@ -1,22 +1,23 @@
-  {% load static %}
-  {% load i18n %}
-  <section id="logos">
-    <div class="container partners padding_top">
-      <div class="row">
-        <div class="col-sm-12 text-center">
-          <h2 class="uppercase">{% trans "Our Partners" %}</h2>
-          <p class="heading_space" {% trans 'Aliquam nec viverra erat. Aenean elit tellus mattis quis maximus.' %}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div id="partner-slider" class="owl-carousel">
-          {% for p in partners %}
-            <div class="item">
-              <img src="{{p.logo.url }}" alt="{{p.partner_name}}">
-            </div>
-          {% endfor %}
-          
-        </div>
+{% load static %}
+{% load i18n %}
+
+<section id="logos">
+  <div class="container partner2 padding">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h2 class="uppercase">Our Partners</h2>
+        <p class="heading_space">Aliquam nec viverra erat. Aenean elit tellus mattis quis maximus.</p>
       </div>
     </div>
-  </section>
+    <div class="row">
+    <div id="partners" class="owl-carousel">
+      {% for p in partners %}
+        <div class="item">
+          <img src="{{ p.logo.url }}" alt="Featured Partner">
+        </div>
+      {% endfor %}  
+
+      </div>
+    </div>
+  </div>
+</section>

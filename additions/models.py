@@ -33,3 +33,19 @@ class Partners(models.Model):
 	class Meta:
 		verbose_name_plural = 'Partners'
 		ordering            = ['priority']	
+		
+
+class Testimonal(models.Model):
+	full_name  = models.CharField(max_length=40)
+	image      = models.ImageField(upload_to='testimonal')
+	company    = models.CharField(max_length=25)
+	comment    = models.TextField()
+	is_active  = models.BooleanField(default=True)
+	created_at = models.DateField(auto_now_add=True)
+	update_at  = models.DateField(auto_now=True)
+
+	def __str__(self):
+		return 'Testimonial by {}'.format(self.full_name)
+
+	class Meta:
+		verbose_name_plural =  'Testimonials'			

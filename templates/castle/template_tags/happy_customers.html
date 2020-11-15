@@ -1,0 +1,27 @@
+ {% load static %}   
+    <div class="container bg_white padding">
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <h2 class="uppercase">Happy Customers</h2>
+          <p class="heading_space">What our clients say about us.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+           <div id="testinomial-slider" class="owl-carousel display navigate">
+            {% for c in customers %}
+              <div class="item">
+                <div class="testinomial_content text-center">
+                  <img src="{{ c.image.url }}" alt="happy client" class="bottom15">
+                 <h4 class="uppercase">{{c.full_name}}</h4>
+                 <span class="smmery bottom15">( {{c.company}}  )</span>
+                 <img src="{% static 'images/stars.png' %}" alt="rating" class="bottom30">
+                 <p>{{c.comment|safe}}</p>
+                </div>
+              </div>
+            {% endfor %}
+ 
+          </div>
+        </div>
+      </div>
+    </div>

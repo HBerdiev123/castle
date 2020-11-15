@@ -1,10 +1,16 @@
+
 {% extends "base.html" %}
+{% load static %}
  
  {% block header %}
-  {% include 'navigation/nav-page.html' %}
+  {% include 'navigation2/nav-home.html' %}
  {% endblock %} 
     
 {% block content %}
   {%include 'home/content.html' %}
 {% endblock %}
 
+
+{% block domready %}
+	<script src="{% static 'js/jquery-countTo.js' %}"></script>
+{% endblock %}

@@ -1,4 +1,5 @@
 {% load static %}
+{% load addition_tags %}
 <!-- Gallery -->
 <section id="property" class="padding bg_gallery">
   <div class="container">
@@ -622,109 +623,15 @@
       </div>
     </div>
   </div>
-    <div class="container bg_white padding">
-      <div class="row">
-        <div class="col-xs-12 text-center">
-          <h2 class="uppercase">Happy Customers</h2>
-          <p class="heading_space">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec viverra erat Aenean elit tellus.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-           <div id="testinomial-slider" class="owl-carousel display navigate">
-            <div class="item">
-              <div class="testinomial_content text-center">
-                <img src="{% static 'images/author2.png' %}" alt="happy client" class="bottom15">
-               <h4 class="uppercase"> SAM NICHOLSON</h4>
-               <span class="smmery bottom15">( NorthMarq Capital  )</span>
-               <img src="{% static 'images/stars.png' %}" alt="rating" class="bottom30">
-               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh tempor cum soluta nobis consectetuer adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel.</p>
-              </div>
-            </div>
-            <div class="item">
-              <div class="testinomial_content text-center">
-                <img src="{% static 'images/author.png' %}" alt="happy client" class="bottom15">
-               <h4 class="uppercase"> SAM NICHOLSON</h4>
-               <span class="smmery bottom15">( NorthMarq Capital  )</span>
-               <img src="{% static 'images/stars.png' %}" alt="rating" class="bottom30">
-               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh tempor cum soluta nobis consectetuer adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel.</p>
-              </div>
-            </div>
-            <div class="item">
-              <div class="testinomial_content text-center">
-                <img src="{% static 'images/author2.png' %}" alt="happy client" class="bottom15">
-               <h4 class="uppercase"> SAM NICHOLSON</h4>
-               <span class="smmery bottom15">( NorthMarq Capital  )</span>
-               <img src="{% static 'images/stars.png' %}" alt="rating" class="bottom30">
-               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh tempor cum soluta nobis consectetuer adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+
+{% show_happy_customer %}
+
+
 </section>
 <!--Testinomials ends-->
 
 
-<!--Partners-->
-<section id="logos">
-  <div class="container partner2 padding">
-    <div class="row">
-      <div class="col-sm-12 text-center">
-      	<h2 class="uppercase">Our Partners</h2>
-        <p class="heading_space">Aliquam nec viverra erat. Aenean elit tellus mattis quis maximus.</p>
-      </div>
-    </div>
-    <div class="row">
-    <div id="partners" class="owl-carousel">
-        <div class="item">
-          <img src="{% static 'images/logo1.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo2.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo3.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo4.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo5.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo1.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo2.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo3.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo4.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo5.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo1.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo2.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo3.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo4.png' %}" alt="Featured Partner">
-        </div>
-        <div class="item">
-          <img src="{% static 'images/logo5.png' %}" alt="Featured Partner">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!--Partners--> 
+{% list_partners %}
 <!--Partners Ends-->

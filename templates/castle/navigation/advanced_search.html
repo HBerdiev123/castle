@@ -2,12 +2,17 @@
 <div class="tp_overlay">
   <div class="topbar clearfix">
     <ul class="breadcrumb_top">
-      <li><a href="favorite_properties.html"><i class="icon-icons43"></i>Favorites</a></li>
+      <li><a href="{% url 'profile:favorites' %}"><i class="icon-icons43"></i>Favorites</a></li>
       <li><a href="submit_property.html"><i class="icon-icons215"></i>Submit Property</a></li>
       <li><a href="my_properties.html"><i class="icon-icons215"></i>My Property</a></li>
-      <li><a href="profile.html"><i class="icon-icons230"></i>{% if request.user.is_authenticated %}{{request.user.username}}{% endif %}</a></li>
-      <li><a href="login.html"><i class="icon-icons179"></i>Login / Register</a></li>
-      <li class="last-icon"><i class="icon-icons215"></i></li>
+       {% if request.user.is_authenticated %}
+              <li><a href="{% url "account:profile" %}"><i class="icon-icons230"></i>{{request.user.username}}</a></li>
+            {% endif %}
+              <li>
+                <a href="{% if request.user.is_authenticated %}{% url 'account_logout' %}{% else %}/accounts/login{% endif %}">
+                  <i class="icon-icons179"></i>
+                    {% if request.user.is_authenticated %}Logout{% else %}Login/Register{% endif %}</a>
+              </li>
     </ul>
   </div>
   

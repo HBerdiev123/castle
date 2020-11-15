@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import FAQ, Partners
+from .models import FAQ, Partners, Testimonal
 # Register your models here.
 
 class FAdmin(admin.ModelAdmin):
@@ -22,3 +22,13 @@ class PartnerAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Partners, PartnerAdmin)
+
+
+class TestimonialAdmin(admin.ModelAdmin):
+	list_display  = ('full_name', 'company', 'is_active')
+	list_filter   = ('is_active',)
+	search_fields = ('full_name', 'company')
+	date_hierarchy= 'created_at'
+	ordering      = ['is_active']
+
+admin.site.register(Testimonal, TestimonialAdmin)	
