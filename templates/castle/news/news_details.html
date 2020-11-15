@@ -15,11 +15,11 @@
      <div class="container">
         <div class="row">
            <div class="col-md-12 text-center">
-              <h1 class="text-uppercase">Blog</h1>
-              <p>Serving you since 1999. Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+              <h1 class="text-uppercase">{% trans "Blog" %}</h1>
+              <p>{{post.title}}</p>
               <ol class="breadcrumb text-center">
-                 <li><a href="#">Home</a></li>
-                 <li><a href="#">Properties</a></li>
+                 <li><a href="{% url "home" %}">Home</a></li>
+                 <li><a href="{% url "news:list" %}">News List</a></li>
                  <li class="active">Blog</li>
               </ol>
            </div>

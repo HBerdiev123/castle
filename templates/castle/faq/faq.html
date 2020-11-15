@@ -1,66 +1,66 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
+
 {% block page_title %}
 	<title>
-		Castle - frequently asked questions
+		{% trans "Castle - frequently asked questions" %}
 	</title>
 {% endblock %}
+
 {% block content %}
 	<section class="page-banner page-banner-bg padding" style="background-position: 50% -57px;">
 	  <div class="container">
 	    <div class="row">
 	      <div class="col-md-12">
-	        <h1 class="p-white text-uppercase">Frequently Asked Questions</h1>
-	        <p class="p-white">Select one of the frequently asked questions below to learn more about buying, selling, and renting real estate.</p>
+	        <h1 class="p-white text-uppercase">{% trans "Frequently Asked Questions" %}</h1>
+	        <p class="p-white">{% trans "Select one of the frequently asked questions below to learn more about buying, selling, and renting real estate." %}</p>
 	      </div>
 	    </div>
 	  </div>
 	</section>
 
 	<section id="news-section-1" class="property-details padding_top" style="min-height:570px">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-8 col-sm-8 col-xs-12">
-            <div class="row">
-               
-                <div class="col-sm-12">
-                   <div class="panel-group" id="accordion">
-      
-                   	{% for f in faq %}	
-	                    <div class="panel panel-default">
+		   <div class="container">
+		      <div class="row">
+		         <div class="col-md-8 col-sm-8 col-xs-12">
+		            <div class="row">
+		                <div class="col-sm-12">
+		                   <div class="panel-group" id="accordion">
+			                   	{% for f in faq %}	
+				                    <div class="panel panel-default">
 
-	                        <div class="panel-heading {% if forloop.first %}active{% endif %}" >
-	                            <h4 class="panel-title">
-	                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel{{forloop.counter}}">
-	                                {{f.title}}
-	                                </a>
-	                            </h4>
-	                        </div>
+				                        <div class="panel-heading {% if forloop.first %}active{% endif %}" >
+				                            <h4 class="panel-title">
+				                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel{{forloop.counter}}">
+				                                {{f.title}}
+				                                </a>
+				                            </h4>
+				                        </div>
 
-	                        {% if forloop.first %}
-		                        <div id="panel{{forloop.counter}}" class="panel-collapse collapse in" aria-expanded="true">
-	                        {% else %}
-		                        <div id="panel{{forloop.counter}}" class="panel-collapse collapse" aria-expanded="false">
-	                        {% endif %}	
+				                        {% if forloop.first %}
+					                        <div id="panel{{forloop.counter}}" class="panel-collapse collapse in" aria-expanded="true">
+				                        {% else %}
+					                        <div id="panel{{forloop.counter}}" class="panel-collapse collapse" aria-expanded="false">
+				                        {% endif %}	
+				                            <div class="panel-body">
+				                                <p class="bottom20">{{f.body}}</p>
+				                            </div>
+				                        </div>
+				                    </div>
+			                    {%endfor%}
+			                  </div>
+			               </div>
+		            </div> 
+		         </div>
 
-	                            <div class="panel-body">
-	                                <p class="bottom20">{{f.body}}</p>
-	                            </div>
-	                        </div>
-	                    </div>
-
-                    {%endfor%}
-
-                  </div>
-               </div>
-            </div> 
-            
-         </div>
-
-      </div>
-   </div>
+		      </div>
+		   </div>
+		</div>
 	</section>
+
 	{% block domready %}
 
 	{% endblock %}
+
 {% endblock %} 
