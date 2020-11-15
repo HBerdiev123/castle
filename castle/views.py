@@ -12,16 +12,13 @@ def contacts(request):
 	return render(request, 'contacts/contact.html',{})
 
 def faq(request):
-	# faq = FAQ.objects.filter(is_active=True)
-	faq = FAQ.objects.all()
-	print('faq')
+	faq = FAQ.objects.filter(is_active=True)
+	# faq = FAQ.objects.all()
 	return render(request, 'faq/faq.html', {'faq':faq})
 
 def error_404(request):
 	return render(request, 'errors/404.html')
 
-def faq(request):
-	return render(request,'faq/faq.html')
 
 def handler404(request, exception):
 	# response = render_to_response('404.html', context_instance = RequestContext(request))

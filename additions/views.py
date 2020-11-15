@@ -4,5 +4,5 @@ from .models import FAQ, Partners
 
 
 def faq(request):
-	faq = FAQ.objects.filter(is_active=True)
-	return render(request, 'faq/faq.html', {'faq':faq})
+	# faq = FAQ.objects.filter(is_active=True)
+	# return render(request, 'faq/faq.html', {'faq':faq})

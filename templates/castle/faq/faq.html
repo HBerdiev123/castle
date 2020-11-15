@@ -25,28 +25,30 @@
                
                 <div class="col-sm-12">
                    <div class="panel-group" id="accordion">
-                   	{{faq}}
+      
                    	{% for f in faq %}	
 	                    <div class="panel panel-default">
-	                        <div class="panel-heading active">
+
+	                        <div class="panel-heading {% if forloop.first %}active{% endif %}" >
 	                            <h4 class="panel-title">
-	                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel1">
-	                                Suspendisse eleifend massa commodo porta lacus bibendum?
+	                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel{{forloop.counter}}">
+	                                {{f.title}}
 	                                </a>
 	                            </h4>
 	                        </div>
-	                        <div id="panel1" class="panel-collapse collapse in">
+
+	                        {% if forloop.first %}
+		                        <div id="panel{{forloop.counter}}" class="panel-collapse collapse in" aria-expanded="true">
+	                        {% else %}
+		                        <div id="panel{{forloop.counter}}" class="panel-collapse collapse" aria-expanded="false">
+	                        {% endif %}	
+
 	                            <div class="panel-body">
-	                                <p class="bottom20">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et dui vestibulum, 
-	                                bibendum purus sit amet, vulputate mauris. Ut adipiscing gravida tincidunt. Duis euismod placerat rhoncus. 
-	                                Phasellus mollis imperdiet placerat. Sed ac turpis nisl. Mauris at ante mauris. Aliquam posuere fermentum lorem, 
-	                                a aliquam mauris rutrum a. Curabitur sit amet pretium lectus, nec consequat orci.</p>
-	                                <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
-	                                Duis et metus in libero sollicitudin venenatis eu sed enim. Nam felis lorem, suscipit ac nisl ac, iaculis 
-	                                dapibus tellus. Cras ante justo, aliquet quis placerat nec, molestie id turpis.</p>
+	                                <p class="bottom20">{{f.body}}</p>
 	                            </div>
 	                        </div>
 	                    </div>
+
                     {%endfor%}
 
                   </div>
