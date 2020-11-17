@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+<!-- Page Banner Start-->
+<section class="page-banner padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1 class="text-uppercase">List of Our Agents</h1>
+        <p>Serving you since 1999. Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+        <ol class="breadcrumb text-center ">
+          <li><a href="{% url "home" %}">Home</a></li>
+          <li><a href="#">Team</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Page Banner End -->
+
+
+
+<!-- Agent Start -->
+<section id="agent-2" class="padding_top padding_bottom_half">
+  <div class="container">
+    <div class="row">
+      {% for agent in agents %}
+        <div class="col-sm-4 bottom40">
+          <div class="agent_wrap">
+            <div class="image">
+              <img src="{{agent.image.url}}" alt="{{agent.full_name}}">
+              <div class="img-info">
+                <h3>{{agent.full_name}}</h3>
+                <span>{{agent.occupation}}</span>
+                <p class="top20 bottom30">{{agent.about_agent}}</p>
+                <table class="agent_contact table">
+                  <tbody>
+                    {% if agent.phone %}
+                      <tr class="bottom10">
+                        <td><strong>{% trans "Phone" %}:</strong></td>
+                        <td class="text-right">{{agent.phone}}</td>
+                      </tr>
+                    {% endif %}
+                    <tr>
+                      <td><strong>{%trans "Email Adress" %}:</strong></td>
+                      <td class="text-right"><a href="#.">{{agent.email_address}}</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <hr>
+                <a class="btn-more" href="javascript:void(0)">
+                <i><img alt="arrow" src="{% static 'images/arrow-yellow.png' %}"></i><span>Full Profile</span><i><img alt="arrow" src="{% static 'images/arrow-yellow.png' %}"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- Agent End -->
+
+
+{% endblock %}

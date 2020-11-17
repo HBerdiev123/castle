@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'django_simple_cookie_consent',
     'contacts',
     'additions',
+    'agents',
 ]
 
 MIDDLEWARE = [
