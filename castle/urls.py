@@ -22,7 +22,8 @@ from rentals import urls
 from profiles import views as team
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('cp/', admin.site.urls),
+    path("admin/", include("admin_honeypot.urls", namespace="admin_honeypot")),
     url('^$', views.home, name='home'),
     # url('^contacts$', views.contacts, name='contacts'),
     url(r'^rentals/', include('rentals.urls')),

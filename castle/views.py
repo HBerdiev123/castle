@@ -5,25 +5,35 @@ from additions.models  import FAQ
 from property.models import Property
 from profiles.models import Team 
 from django.contrib.auth.models import User
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 # from django.templates import RequestContext
 
-
+@vary_on_cookie
+@cache_page(60)
 def home(request):
-	objs   = Property.objects.all()[10:]
-	teams = User.objects.filter(is_active=True, is_staff=True)[3:] 
-	return render(request, 'home/index.html',{'objs':objs, 'teams':teams})
+	objs     = Property.objects.all()[9:]
+	teams    = User.objects.filter(is_active=True, is_staff=True)[3:] 
+	featured = Property.objects.filter(featured=True)[10:]
+	
+	return render(request, 'home/index.html',{
+		'objs':objs,
+		'teams':teams,
+		'featured':featured})
 
 def contacts(request):
 	return render(request, 'contacts/contact.html',{})
 
+@vary_on_cookie
+@cache_page(3600)
 def faq(request):
 	faq = FAQ.objects.filter(is_active=True)
 	# faq = FAQ.objects.all()
 	return render(request, 'faq/faq.html', {'faq':faq})
 
+
 def error_404(request):
 	return render(request, 'errors/404.html')
-
 
 def handler404(request, exception):
 	# response = render_to_response('404.html', context_instance = RequestContext(request))

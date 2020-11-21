@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'contacts',
     'additions',
     'agents',
+    'admin_honeypot',
 ]
 
 MIDDLEWARE = [
@@ -142,6 +143,28 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Memache settings for those who prefer memache
+CACHES = {"memcached": {
+                        "BACKEND":"django.core.cache.backends.memcached.MemcachedCache",
+                        "LOCATION": "localhost:11211",
+                        "TIMEOUT": 60,  # 1 minute
+                        "KEY_PREFIX": "myproject",
+                        },
+}
+
+CACHES["default"] = CACHES["memcached"]
+
+
+# CACHES = {
+#         "redis": {
+#                 "BACKEND": "redis_cache.RedisCache",
+#                 "LOCATION": ['localhost:6379'],
+#                 "TIMEOUT": 60, # 1 minute
+#                 "KEY_PREFIX": "myproject",
+#         },
+# }
+
+# CACHES["default"] = CACHES["redis"]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
