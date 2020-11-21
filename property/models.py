@@ -132,6 +132,9 @@ class Property(models.Model):
 	def get_absolute_url(self):
 		return reverse("rentals:detail", kwargs={"id": self.id})
 
+	class Meta:
+		ordering = ['-created']
+		
 	def __str__(self):
 		return f'Address: {self.address} status: {self.status}'
 

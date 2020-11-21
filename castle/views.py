@@ -2,11 +2,16 @@ from django.shortcuts import render
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from additions.models  import FAQ
+from property.models import Property
+from profiles.models import Team 
+from django.contrib.auth.models import User
 # from django.templates import RequestContext
 
 
 def home(request):
-	return render(request, 'home/index.html',{})
+	objs   = Property.objects.all()[10:]
+	teams = User.objects.filter(is_active=True, is_staff=True)[3:] 
+	return render(request, 'home/index.html',{'objs':objs, 'teams':teams})
 
 def contacts(request):
 	return render(request, 'contacts/contact.html',{})

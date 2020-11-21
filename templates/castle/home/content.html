@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load addition_tags %}
 <!-- Gallery -->
 <section id="property" class="padding bg_gallery">
@@ -536,90 +537,38 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-4 margin40">
-          <div class="agent_wrap">
-            <div class="image">
-              <img src="{% static 'images/agent-one.jpg' %}" alt="Agents">
-              <div class="img-info">
-                <h3>Bohdan Kononets</h3>
-                <span>sales executive</span>
-                <p class="top20 bottom30">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh tempor cum soluta nobis consectetuer.</p>
-                <table class="agent_contact table">
-                  <tbody>
-                    <tr class="bottom10">
-                      <td><strong>Phone:</strong></td>
-                      <td class="text-right">(+01) 34 56 7890</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Email Adress:</strong></td>
-                      <td class="text-right"><a href="#.">bohdan@castle.com</a></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <hr>
-                <a class="btn-more" href="agent_profile.html">
-                <i><img alt="arrow" src="{% static 'images/arrow-yellow.png' %}"></i><span>Full Profile</span><i><img alt="arrow" src="{% static 'images/arrow-yellow.png' %}"></i>
-                </a>
+        {% for agent in teams %}
+        {% with profile=agent.profile %}
+          <div class="col-sm-4 margin40">
+            <div class="agent_wrap">
+              <div class="image">
+                <img src="{{profile.photo.url}}" alt="Agents">
+                <div class="img-info">
+                  <h3>{{agent.first_name}} {{agent.last_name}}</h3>
+                  <span>{{profile.team.occupation}}</span>
+                  <p class="top20 bottom30">{{profile.about}}</p>
+                  <table class="agent_contact table">
+                    <tbody>
+                      <tr class="bottom10">
+                        <td><strong>{% trans "Phone" %}:</strong></td>
+                        <td class="text-right">{{profile.mobile}}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>{% trans "Email Adress" %}:</strong></td>
+                        <td class="text-right"><a href="#.">{{agent.email}}</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <hr>
+                  <a class="btn-more" href="{% url "agent" agent.id %}">
+                  <i><img alt="arrow" src="{% static 'images/arrow-yellow.png' %}"></i><span>Full Profile</span><i><img alt="arrow" src="{% static 'images/arrow-yellow.png' %}"></i>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-4 margin40">
-          <div class="agent_wrap">
-            <div class="image">
-              <img src="{% static 'images/agent-five.jpg' %}" alt="Agents">
-              <div class="img-info">
-                <h3>Bohdan Kononets</h3>
-                <span>sales executive</span>
-                <p class="top20 bottom30">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh tempor cum soluta nobis consectetuer.</p>
-                <table class="agent_contact table">
-                  <tbody>
-                    <tr class="bottom10">
-                      <td><strong>Phone:</strong></td>
-                      <td class="text-right">(+01) 34 56 7890</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Email Adress:</strong></td>
-                      <td class="text-right"><a href="#.">bohdan@castle.com</a></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <hr>
-                <a class="btn-more" href="agent_profile.html">
-                <i><img alt="arrow" src="{% static 'images/arrow-yellow.png' %}"></i><span>Full Profile</span><i><img alt="arrow" src="{% static 'images/arrow-yellow.png' %}"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4 margin40">
-          <div class="agent_wrap">
-            <div class="image">
-              <img src="{% static 'images/agent-six.jpg' %}" alt="Agents">
-              <div class="img-info">
-                <h3>Bohdan Kononets</h3>
-                <span>sales executive</span>
-                <p class="top20 bottom30">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh tempor cum soluta nobis consectetuer.</p>
-                <table class="agent_contact table">
-                  <tbody>
-                    <tr class="bottom10">
-                      <td><strong>Phone:</strong></td>
-                      <td class="text-right">(+01) 34 56 7890</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Email Adress:</strong></td>
-                      <td class="text-right"><a href="#.">bohdan@castle.com</a></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <hr>
-                <a class="btn-more" href="agent_profile.html">
-                <i><img alt="arrow" src="{% static 'images/arrow-yellow.png' %}"></i><span>Full Profile</span><i><img alt="arrow" src="{% static 'images/arrow-yellow.png' %}"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+          {%endwith%}
+        {% endfor %}
       </div>
     </div>
   </div>
