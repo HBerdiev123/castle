@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from rentals import urls
+from profiles import views as team
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,10 +34,12 @@ urlpatterns = [
     path('profile/',  include('profiles.urls', namespace='profile')),
     path('accounts/', include('allauth.urls')),
     path('contacts/', include('contacts.urls', namespace='contacts')),
-    path('teams/',    include('agents.urls', namespace='teams')),
+    # path('teams/',    include('agents.urls', namespace='teams')),
     # path('additions/', include('additions.urls', namespace='additions')),
     url(r'$send/$', views.send_mail, name="send-mail" ),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    path('teams/', team.list_agents, name='agents'),
+    path('team/<int:id>', team.detail_agent, name='agent'),
 
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

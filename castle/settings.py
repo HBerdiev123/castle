@@ -113,13 +113,13 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 
-    #    'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'castel',
-    #     'USER': 'castel',
-    #     'PASSWORD': 'Adgjmptw',
-    #     'HOST': '',
-    #     'PORT': '',
+       # 'default': {
+       #  'ENGINE': 'django.db.backends.postgresql_psycopg2',
+       #  'NAME': 'castel',
+       #  'USER': 'castel',
+       #  'PASSWORD': 'Adgjmptw',
+       #  'HOST': '',
+       #  'PORT': '',
     # }
 }
 

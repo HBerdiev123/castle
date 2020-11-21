@@ -28,36 +28,38 @@
   <div class="container">
     <div class="row">
       {% for agent in agents %}
+      {% with profile=agent.profile %}
         <div class="col-sm-4 bottom40">
           <div class="agent_wrap">
             <div class="image">
-              <img src="{{agent.image.url}}" alt="{{agent.full_name}}">
+              <img src="{{profile.photo.url}}" alt="{{agent.username}}">
               <div class="img-info">
-                <h3>{{agent.full_name}}</h3>
-                <span>{{agent.occupation}}</span>
-                <p class="top20 bottom30">{{agent.about_agent}}</p>
+                <h3>{{agent.first_name}} {{agent.last_name}}</h3>
+                <span>{{profile.team.occupation}}</span>
+                <p class="top20 bottom30">{{profile.about}}</p>
                 <table class="agent_contact table">
                   <tbody>
-                    {% if agent.phone %}
+                    {% if profile.phone %}
                       <tr class="bottom10">
                         <td><strong>{% trans "Phone" %}:</strong></td>
-                        <td class="text-right">{{agent.phone}}</td>
+                        <td class="text-right">{{profile.phone}}</td>
                       </tr>
                     {% endif %}
                     <tr>
                       <td><strong>{%trans "Email Adress" %}:</strong></td>
-                      <td class="text-right"><a href="#.">{{agent.email_address}}</a></td>
+                      <td class="text-right"><a href="#.">{{agent.email}}</a></td>
                     </tr>
                   </tbody>
                 </table>
                 <hr>
-                <a class="btn-more" href="javascript:void(0)">
+                <a class="btn-more" href="{% url 'agent' agent.id %}">
                 <i><img alt="arrow" src="{% static 'images/arrow-yellow.png' %}"></i><span>Full Profile</span><i><img alt="arrow" src="{% static 'images/arrow-yellow.png' %}"></i>
                 </a>
               </div>
             </div>
           </div>
         </div>
+        {%endwith%}
       {% endfor %}
     </div>
   </div>

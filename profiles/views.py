@@ -1,15 +1,19 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from django.contrib.auth import authenticate, login 
-from .forms import LoginForm, UserEditForm, ProfileEditForm
-from .models import Profile
-# from .models import MyFavorites
-from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, JsonResponse, Http404
+from django.core.paginator import Paginator
 from django.contrib import messages
-from property.models import Property 
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
+from django.contrib.auth import authenticate, login, get_user_model 
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST, require_GET
+
 from common.decorators import ajax_required
+
+from .forms import LoginForm, UserEditForm, ProfileEditForm
+
+# from .models import MyFavorites
+from .models import Profile, Team
+from property.models import Property 
+
 
 # Create your views here.
 
@@ -97,7 +101,6 @@ def list_favorites(request):
 	return render(request, 'profile/list_favorites.html', {'profile':profile})
 
 
-
 @ajax_required
 @login_required
 @require_POST
@@ -116,3 +119,31 @@ def add_to_favorities(request):
 		except:
 			pass
 	return JsonResponse({'status':'error'})		
+
+def is_ajax(request):
+	return request.META.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest"
+
+
+def list_agents(request):
+	agents  = get_user_model().objects.filter(is_active=True, is_staff=True).exclude(is_superuser=True)
+	# agents = Team.objects.all()
+	return render(request, 'agent/agent_list.html', {"agents":agents})
+
+@require_GET
+def detail_agent(request, id):
+	User  = get_user_model()
+	agent = get_object_or_404(User, id=id, is_active=True)
+	all_properties = Property.objects.filter(id=agent.id).order_by('-created')
+	paginator  = Paginator(all_properties, per_page=10)
+	page_num = int(request.GET.get('page', 1))
+	if page_num>paginator.num_pages:
+		raise Http404
+	properties = paginator.page(page_num)
+
+	if is_ajax(request):
+		return render(request, 'agent/_properties.html', {'properties':properties})	
+
+	return render(request, 'agent/agent_profile.html', 
+		{'agent':agent, 
+		'properties':all_properties})	
+

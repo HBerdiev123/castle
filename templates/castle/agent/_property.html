@@ -1,0 +1,48 @@
+ {% load static %} 
+ {% load i18n %}   
+   <div class="col-sm-4">
+          <div class="property_item heading_space">
+            <div class="image">
+              <a href="#."><img src="{% static 'images/listing1.jpg' %}" alt="latest property" class="img-responsive"></a>
+              <div class="price clearfix"> 
+                <span class="tag pull-right">${{property.price}} Per Month</span>
+              </div>
+
+              <span class="tag_t">{% if property.purpose == '0' %}{% trans "For Rent" %}{% else %}{% trans "For Sale" %}{% endif %}</span> 
+               {% if property.featured %}
+                <span class="tag_l">{% trans "Featured" %}</span>
+              {% endif %}
+            </div>
+            <div class="proerty_content">
+              <div class="proerty_text">
+                <h3 class="captlize"><a href="#.">{{property.short_description}}</a></h3>
+                <p>{{property.address}}</p>
+              </div>
+              <div class="property_meta transparent"> 
+                <span><i class="icon-select-an-objecto-tool"></i>{{property.size}} {% trans "sq ft" %}</span> 
+                <span><i class="icon-bed"></i>{{property.bedroom}} {% trans "Rooms" %}</span> 
+                <span><i class="icon-safety-shower"></i>{{property.bathroom}} {% trans "Bathroom" %}</span>   
+              </div>
+              <div class="property_meta transparent bottom30">
+                <span><i class="icon-old-television"></i>TV Lounge</span>
+                <span><i class="icon-garage"></i>{{prop.garage}} {% trans "Garage" %}</span>
+                <span></span>
+              </div>
+              <div class="favroute clearfix">
+                <p class="pull-md-left"><i class="icon-calendar2"></i>&nbsp; {{property.created|timesince}}  {% trans "ago" %}</p>
+                <ul class="pull-right">
+                  <li><a href="#."><i class="icon-like"></i></a></li>
+                  <li><a href="#three" class="share_expender" data-toggle="collapse"><i class="icon-share3"></i></a></li>
+                </ul>
+              </div>
+              <div class="toggle_share collapse" id="three">
+                <ul>
+                  <li><a href="#." class="facebook"><i class="icon-facebook-1"></i> Facebook</a></li>
+                  <li><a href="#." class="twitter"><i class="icon-twitter-1"></i> Twitter</a></li>
+                  <li><a href="#." class="vimo"><i class="icon-vimeo3"></i> Vimeo</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+       

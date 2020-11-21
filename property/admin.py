@@ -36,7 +36,14 @@ class PropertyAdmin(admin.ModelAdmin):
 	formfield_overrides = {
 		models.ManyToManyField: {'widget': CheckboxSelectMultiple},
 		}
-	inlines = [ImagesInline]	
+	inlines = [ImagesInline]
+	# exclude = ('user',)
+	readonly_fields = ('user',)
+
+	def save_model(self, request, obj, form, change):
+		# if not obj.user.id:
+		obj.user = request.user
+		obj.save()	
   
 admin.site.register(Property, PropertyAdmin)
 

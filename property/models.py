@@ -7,6 +7,7 @@ from django.urls import reverse
 from castle.utils import unique_slug_generator
 from django.db.models.signals import pre_save, post_save
 from django.db.models import Max, Min
+from django.conf import settings 
 
 # Create your models here.
 
@@ -23,8 +24,6 @@ class PropertyCategory(models.Model):
 	title          =models.CharField(max_length=255)
 	description    =models.TextField()
 	created        =models.DateTimeField(auto_now=True)
-
-
 
 
 
@@ -104,6 +103,7 @@ class PropertyManager(models.Manager):
 
 
 class Property(models.Model):
+	user		     = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='properties', on_delete=models.CASCADE)
 	address            = models.CharField(max_length=255)
 	short_description  = models.CharField(max_length=150, blank=True, null=True)
 	size             = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.00'))])
@@ -124,7 +124,7 @@ class Property(models.Model):
 	pet_policy		 = models.CharField(max_length=50, choices=PET_POLICY, default="0")
 	# picture          =models.ForeignKey(Picture, on_delete=models.CASCADE)
 	created     	 = models.DateTimeField(auto_now=True)
-	featured 		 = models.BooleanField(default=False)
+	featured 		 = models.BooleanField(default=False, blank=True)
 	slug 			 = models.SlugField(blank=True, unique=True)
 
 	objects          = PropertyManager()        
@@ -134,6 +134,12 @@ class Property(models.Model):
 
 	def __str__(self):
 		return f'Address: {self.address} status: {self.status}'
+
+	# def save(self, *args, **kwargs):
+	# 	if not self.user:
+	# 		self.user = django.contrib.auth.get_user_model()
+	# 		print(django.contrib.auth.get_user_model())
+	# 	super().save(*args, *kwargs)	 	
 
 def property_pre_save_receiver(sender, instance, *args, **kwargs):
 	if not instance.slug:
