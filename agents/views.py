@@ -1,6 +1,10 @@
-from django.shortcuts import render
-from profiles.models import Team
+from django.shortcuts    import render
+from profiles.models     import Team
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
+from contacts.forms   import AgentForm 
+
+
 # Create your views here.
 
 def list(request):
@@ -10,4 +14,13 @@ def list(request):
 
 def detail(request, id):
 	agent  = get_user_model.objects.get(id=id).filter(is_active=True)
-	return render(request, 'agent/agent_profile.html', {'agent':agent})	
+	if request.method=='POST':
+    	contacts = AgentForm(request.POST)
+    	if contacts.is_valid():
+    		data = contacts.cleanded_data
+    		data.save()
+    else:
+    	contacts = AgentForm()
+
+	return render(request, 'agent/agent_profile.html', {'agent':agent, 'contacts':contacts})	
+
