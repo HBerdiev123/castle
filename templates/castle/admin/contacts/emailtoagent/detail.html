@@ -1,0 +1,73 @@
+{# {% extends "admin/base_site.html" %} #}
+{% extends 'admin/base_site.html' %}
+{% block title %}
+Email {{ email.id }} {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+	<div class="breadcrumbs">
+		<a href="{% url "admin:index" %}">Home</a> &rsaquo;
+		<a href="{% url "admin:contacts_emailtoagent_changelist" %}">Emails</a>
+		&rsaquo;
+		<a href="{% url "admin:contacts_emailtoagent_change" email.id %}">Email {{ email.id }}</a>
+		&rsaquo; Detail
+	</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col-sm-6">
+<h1>Email {{ email.id }}</h1>
+<ul class="object-tools">
+	<li>
+		<a href="#" onclick="window.print();">Print Email</a>
+	</li>
+</ul>
+
+<table>
+	<tr>
+		<th>Created</th>
+		<td>{{ email.created_at }}</td>
+	</tr>
+	<tr>
+		<th>Sender</th>
+		<td>{{ email.sender }}</td>
+	</tr>
+	<tr>
+		<th>Recipent</th>
+		<td>{{ email.agent.first_name }} {{email.agent.last_name}}</td>
+	</tr>
+	<tr>
+		<th>E-mail</th>
+		<td><a href="mailto:{{ email.email }}">{{ email.email }}</a></td>
+	</tr>
+	<tr>
+		<th>Content</th>
+		<td>
+		{{ email.message }}, 
+		</td> 
+	</tr>
+
+	<tr>
+		<th>Status</th>
+		<td>{% if order.paid %}Paid{% else %}Pending payment{% endif %}</td>
+	</tr>
+</table>
+</div>
+	<div class="col-sm-6">
+		<div class="form">
+			<form>
+				{{ form.as_p }}
+				{{ form.sender.errors}}
+				{{ form.agent.errors}}
+				{{ form.email.errors}}
+				{% csrf_token %}
+				<div class="submit-row">
+					<input type="submit" value='Send Message' name="Send Message">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

@@ -5,7 +5,7 @@ from additions.models import FAQ
 from property.models  import Property
 from profiles.models  import Team 
 from contacts.models  import Emails
-
+from django.contrib.auth.models import User
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary  import vary_on_cookie
 # from django.templates import RequestContext

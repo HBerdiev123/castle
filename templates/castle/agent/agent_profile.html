@@ -21,7 +21,9 @@
   </div>
 </section>
 <!-- Page Banner End -->  
-  
+     {% if form.errors %}
+            <h1>ERRORRRRRR same email again???</h1>
+            {% endif %}
 <!-- Agent Profile -->
 <section id="agents" class="padding_bottom_half padding_top">
   <div class="container">
@@ -71,30 +73,41 @@
           </div>
           
           <div class="col-sm-6 bottom40">
-            <form class="callus">
+
+            <form class="callus" method='post'>
               <div class="row">
-
-                {{contacts}}s
-
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Name">
+                        {{ form.name.errors }}
+
+                    <input type="text" class="form-control" name='sender' placeholder="Name">
                   </div>
                 </div>
-                <div class="form-group col-sm-6">  
-                 
-                    <input type="tel" class="form-control" placeholder="Phone Number">
+                <div class="form-group col-sm-6"> 
+                                        {{ form.phone_number.errors }}
+ 
+                    <input name="phone_number" type="tel" class="form-control" placeholder="Phone Number">
                   </div>
                   <div class="form-group col-sm-6">
-                    <input type="email" class="form-control" placeholder="Email">
-                  </div>
+                                            {{ form.email.errors }}
 
-             
+                    <input type="email" name='email' class="form-control" placeholder="Email">
+                  </div>             
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <textarea class="form-control" placeholder="Message"></textarea>
+                                            {{ form.message.errors }}
+
+                    <textarea name="message" class="form-control" placeholder="Message"></textarea>
                   </div>
                 </div>
+                                        {{ form.agent.errors }}
+
+      
+                <select name='agent' selected="selected" style='display:none'>
+                          <option value="{{form.agent.initial}}" selected>{{form.agent.initial}}</option> 
+                </select>
+        
+                {% csrf_token %}
                 <div class="col-sm-12 row">
                   <div class="row">
                     <div class="col-sm-4">

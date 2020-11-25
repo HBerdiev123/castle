@@ -8,5 +8,6 @@ urlpatterns = [
 	path('edit/', views.edit, name='edit'),
 	path('favorites/', views.list_favorites, name='favorites'),
 	path('add_fav/', views.add_to_favorities, name='add_fav'),
+	path('admin/contacts/<int:email_id>/', views.admin_email_detail, name='admin_email_detail'),
 
 ]
