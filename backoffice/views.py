@@ -678,7 +678,7 @@ def send_property(request):
 
 
 
-		new_url='http://127.0.0.1:8000/rentals/search/?query=%s&location=&category=%s&purpose=%s&available_from=%s&min_bed=%s&min_bath=%s&min_area=%s&max_area=%s&min_price=%s&max_price=%s' % (query, category, purpose, available_from, min_bed, min_bath,  min_area, max_area, min_price, max_price)
+		new_url='http://castle787.herokuapp.com/rentals/search/?query=%s&location=&category=%s&purpose=%s&available_from=%s&min_bed=%s&min_bath=%s&min_area=%s&max_area=%s&min_price=%s&max_price=%s' % (query, category, purpose, available_from, min_bed, min_bath,  min_area, max_area, min_price, max_price)
 
 		# Your Account Sid and Auth Token from twilio.com/console
 		# and set the environment variables. See http://twil.io/secure

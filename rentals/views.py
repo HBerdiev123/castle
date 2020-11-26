@@ -321,8 +321,6 @@ def delete_js(request):
 
 
 
-
-
 def Convert(string): 
     li = list(string.split("[")) 
     return li 
