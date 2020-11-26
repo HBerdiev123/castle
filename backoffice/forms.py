@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
 from djrichtextfield.widgets import RichTextWidget
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 

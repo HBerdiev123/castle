@@ -1,0 +1,64 @@
+{% load static %}
+ {% load widget_tweaks %}
+
+{% if new_message %}
+
+<h2>Your message has been submitted</h2>
+{%  else %}
+ <form class="callus" method="post" id='message_form' >
+    {% csrf_token %}
+              <div class="row" id='message_fields'>
+                
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    {% render_field message_form.full_name type="text" class="form-control"  placeholder="Name" %}
+                    {% comment %}
+                    <input type="text" class="form-control" id='full_name' required="true"  placeholder="Name">
+                {% endcomment %}
+                  </div>
+                  <div class="form-group">
+                    {% render_field message_form.phone_number type="text" class="form-control"  placeholder="Phone Number" %}
+                    {% comment %}
+                    <input type="tel" class="form-control" id='phone_number'   placeholder='Phone Number'>
+                {% endcomment %}
+                
+                  </div>
+                  <div class="form-group">
+                    {% render_field message_form.email type="email" class="form-control"  placeholder="Email" %}
+                    {% comment %}
+                        <input type="email" class="form-control" required="true"  placeholder='Email' id='email'>
+  
+  {% endcomment %}
+                              </div>
+                   <div class="form-group" style="visibility: hidden" >
+                    {% render_field message_form.properties type="text" class="form-control"  value='{{property.id}}' %}
+                
+                  </div>
+                </div>
+                <div class="col-sm-6">
+
+                  <div class="form-group">
+                  {% render_field message_form.message type="text" class="form-control"  placeholder="Message" %}
+                    {% comment %}
+                    <textarea class="form-control" id='message' required="true" placeholder="Message"></textarea>
+                {% endcomment %}
+                
+                  </div>
+                </div>
+
+                {% comment %}
+                {{message_form.as_p}}
+                {% endcomment %}
+                <div class="col-sm-12 row">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <button type="Submit"  class="btn-blue uppercase border_radius">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+        
+{% endif %}

@@ -25,6 +25,7 @@ urlpatterns = [
     path('cp/', admin.site.urls),
     path("admin/", include("admin_honeypot.urls", namespace="admin_honeypot")),
     url('^$', views.home, name='home'),
+    url(r'^backoffice/', include('backoffice.urls')),
     # url('^contacts$', views.contacts, name='contacts'),
     url(r'^rentals/', include('rentals.urls')),
     url(r'^news/',    include('news.urls', namespace="news")),
@@ -41,6 +42,7 @@ urlpatterns = [
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
     path('teams/', team.list_agents, name='agents'),
     path('team/<int:id>', team.detail_agent, name='agent'),
+    # url(r'^imagefit/', include('imagefit.urls')),
 
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

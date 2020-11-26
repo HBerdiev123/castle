@@ -1,0 +1,27 @@
+<div class="padding_bottom text-center">
+          <ul class="pager">
+{% print(page) %}
+{% print('ddddddddddddddddddddddd') %}
+
+   {% if page.has_previous %}
+      <a href="?page=1" class="pager_first"></a>
+    {% endif %}
+    {% if page.has_previous %}
+      <a href="?page={{ page.previous_page_number }}">{{page.previous_page_number}}</a>
+    {% endif %}
+      <span class="pager_current active">
+      {{ page.number }}
+    </span>
+    {% if page.has_next %}
+      <a href="?page={{ page.next_page_number }}">{{ page.next_page_number }}</a>
+    {% endif %}
+    {% if page.has_next %}
+      <a href="?page={{ page.paginator.num_pages }}" class="pager_last"></a>
+    {% endif %}
+            <li><a href="#">1</a></li>
+            <li class="active"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+          </ul>
+        </div>
+
+ 

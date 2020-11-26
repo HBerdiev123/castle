@@ -70,6 +70,13 @@ INSTALLED_APPS = [
     'agents',
     'admin_honeypot',
     'backoffice',
+    'easy_thumbnails',
+    'columns',  
+    'widget_tweaks',
+    'django_twilio',
+    'django.contrib.postgres',
+    'rentals',
+    'djrichtextfield',
 ]
 
 MIDDLEWARE = [
