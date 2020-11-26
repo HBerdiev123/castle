@@ -1,0 +1,110 @@
+{% load static %}
+
+<script type='text/javascript' src="{% static 'assets/js/lib/jquery.min.js' %}"></script>
+
+
+
+                            <div id='list_table' class="card-body">
+                                   <table class="table table-responsive table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title</th>
+                                                <th>Phone Number</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for contact_number in contact_numbers %}
+                                            <tr id="tr_{{contact_number.id}}">
+                                                <th  scope="row">{{contact_number.id}}</th>
+                                                <td>{{contact_number.title}}</td>
+                                                <td>{{contact_number.contact_number}}</td>
+                                                <td>{{contact_number.created}}</td>
+                                                <td>  <input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token }}' />        
+                                                <a href="/backoffice/contact_number/{{contact_number.id}}"><button  type="button"  class="btn btn-info ti-settings"></button></a><button    data-toggle="modal" data-target="#exampleModalCenter{{contact_number.id}}" id="{{contact_number.id}}" type="button"  class="btn btn-danger ti-trash"></button></td>
+
+                                                
+                                                <div class="modal fade"  id="exampleModalCenter{{contact_number.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Löschen</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                      </div>
+                                                      <div class="modal-body">
+
+                                                        Bist du sicher, das du das löschen möchtest?
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Schließen</button>
+                                                        <button type="button" data-dismiss="modal" onclick="deleteContactnumber(); return false" id="{{contact_number.id}}"  class="btn btn-danger">Löschen</button>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                            </tr>
+                                          {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                             <script type='text/javascript' src="{% static 'assets/js/lib/jquery.min.js' %}"></script>
+                            {% csrf_token %}
+                            <script type="text/javascript">
+
+                            // function getId(e){
+                            //     var get_button_id=event.srcElement.id;
+                            //     return get_button_id
+
+                            // }
+
+                            function getCookie(name) {
+                                var cookieValue = null;
+                                if (document.cookie && document.cookie != '') {
+                                    var cookies = document.cookie.split(';');
+                                    for (var i = 0; i < cookies.length; i++) {
+                                        var cookie = jQuery.trim(cookies[i]);
+                                        // Does this cookie string begin with the name we want?
+                                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                            break;
+                                        }
+                                    }
+                                }
+                                return cookieValue;
+                            };
+                            var csrftoken = getCookie('csrftoken');
+                            function deleteContactnumber(e) {
+                                  var get_id=event.srcElement.id;
+
+                                   console.log(get_id)
+                                        $.ajax({
+                                            url: '{% url "backoffice:delete_contact_number" %}',
+                                            type: "POST",
+                                            dataType: "json",
+                                            headers: {//<==
+                                                    "X-CSRFTOKEN": csrftoken,
+                                            },
+                                            
+                                            data: {
+                                                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                                                'pk': get_id,
+                                                },
+                                                    
+                                           success: function(data){
+                                            if(data.status='deleted'){
+                                              document.getElementById('tr_'+get_id).style.display='none';
+
+                                            }
+                                           
+                                        }
+                                        })
+                                    };
+
+
+                    
+                            </script>

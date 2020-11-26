@@ -1,0 +1,300 @@
+{% load static %}
+<script type='text/javascript' src="{% static 'assets/js/lib/jquery.min.js' %}"></script>
+
+    <div id='list_table' class="card-body">
+      <table class="table table-responsive table-hover ">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Address</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Bedroom</th>
+            <th>Bathroom</th>
+            <th>Available From</th>
+            <th>Floor/Total Floor</th>
+            <th>Featured</th>
+            <th> Status  </th>
+            <th>        </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for property in properties %}
+            <tr id="tr_{{property.id}}">
+              <th  scope="row">{{property.id}}</th>
+                <td>{{property.address.street}}, {{property.address.city}}, {{property.address.region}}</td>
+                <td>{{property.size}}</td>
+                <td class="color-primary">€{{property.price}}</td>
+                <td>{{property.bedroom}}</td>
+                <td>{{property.bathroom}}</td>
+                <td>{{property.available_from}}</td>
+                <td class="color-primary">{{property.floor}}/{{property.total_floor}}</td>
+                <td class="color-primary">{% if property.featured is True %}<span class="badge badge-primary">Featured</span>{% endif %}</td>
+                <td> 
+                  <label class="switchbutton">
+                    <input class="switch-input" id="{{property.id}}" {% if property.status == "1" %} checked {% endif %} type="checkbox" />
+                    <span class="switch-label" data-on="Active"  data-off="Not Active"></span> 
+                    <span class="switch-handle"></span> 
+                  </label>
+               
+               {% comment %}
+                 <input type="checkbox" id="{{property.id}}" class="toggle" checked data-toggle="toggle" data-on="Active" data-off="Not Active" data-onstyle="success" data-offstyle="danger">
+               {% endcomment %}
+               
+               
+
+               </td>
+                <td>  <input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token }}' />        
+                  <a href="/backoffice/manage_properties/{{property.id}}">
+                    <button  type="button"  class="btn btn-info ti-settings"></button>
+                  </a>
+                  <button    data-toggle="modal" data-target="#exampleModalCenter{{property.id}}" type="button"  class="btn btn-danger ti-trash">
+                    
+                  </button>
+                </td>
+                <div class="modal fade"  id="exampleModalCenter{{property.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Löschen</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                        Bist du sicher, das du das löschen möchtest?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Schließen</button>
+                        <button type="button" data-dismiss="modal" onclick="deleteCommand(); return false" id="{{property.id}}"  class="btn btn-danger">Löschen</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+
+
+{% comment %}
+{# 
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+ #}
+ {% endcomment %}
+
+{% csrf_token %}
+<script type="text/javascript">
+
+
+
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+    function deleteCommand(e) {
+       get_id=event.srcElement.id;
+            $.ajax({
+                url: '{% url "backoffice:deleteproperty" %}',
+                type: "POST",
+                dataType: "json",
+               
+                data: {
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                    'pk': get_id,
+                    },
+                        
+               success: function(data){
+                if(data.status='deleted'){
+                  document.getElementById('tr_'+get_id).style.display='none';
+
+                }
+               
+            }
+            })
+        };
+
+
+  $(document).ready(function() {
+    $('.switch-input').on('change', function() {
+   
+      var isChecked = $(this).is(':checked');
+      var get_id = $(this).attr('id');
+      console.log(isChecked)
+      console.log(get_id)
+      if(isChecked==true) {
+        console.log('chekced')
+             $.ajax({
+                async: false,
+                url: '{% url "backoffice:changestatus" %}',
+                type: "POST",
+                dataType: "json",
+               
+                
+                data: {
+                    'status': 'active',
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                    'pk':get_id,
+                    },
+                        
+               success: function(data){
+
+
+                console.log(data)
+                  console.log('changed')
+            }
+            })
+      } 
+      else {
+                console.log('not chekced')
+                $.ajax({
+                async: false,
+                url: '{% url "backoffice:changestatus" %}',
+                type: "POST",
+                dataType: "json",
+              
+                data: {
+                    'status': 'inactive',
+                    'pk':get_id,
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+
+                    },
+                        
+               success: function(data){
+                console.log(data)
+                  console.log('changed')
+            }
+            })
+
+      }
+
+      
+
+    });
+  });
+
+
+</script>
+
+     
+<style>
+.switchbutton {
+  position: relative;
+  display: block;
+  vertical-align: top;
+  width: 100px;
+  height: 30px;
+  padding: 3px;
+  margin: 0 10px 10px 0;
+  background: linear-gradient(to bottom, #eeeeee, #FFFFFF 25px);
+  background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF 25px);
+  border-radius: 18px;
+  box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  box-sizing:content-box;
+}
+.switch-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  box-sizing:content-box;
+}
+.switch-label {
+  position: relative;
+  display: block;
+  height: inherit;
+  font-size: 10px;
+  text-transform: uppercase;
+  background: #eceeef;
+  border-radius: inherit;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
+  box-sizing:content-box;
+}
+.switch-label:before, .switch-label:after {
+  position: absolute;
+  top: 50%;
+  margin-top: -.5em;
+  line-height: 1;
+  -webkit-transition: inherit;
+  -moz-transition: inherit;
+  -o-transition: inherit;
+  transition: inherit;
+  box-sizing:content-box;
+}
+.switch-label:before {
+  content: attr(data-off);
+  right: 11px;
+  color: #aaaaaa;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+}
+.switch-label:after {
+  content: attr(data-on);
+  left: 11px;
+  color: #FFFFFF;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+}
+.switch-input:checked ~ .switch-label {
+  background: #41c300;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
+}
+.switch-input:checked ~ .switch-label:before {
+  opacity: 0;
+}
+.switch-input:checked ~ .switch-label:after {
+  opacity: 1;
+}
+.switch-handle {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(to bottom, #FFFFFF 40%, #f0f0f0);
+  background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
+  border-radius: 100%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+.switch-handle:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -6px 0 0 -6px;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(to bottom, #eeeeee, #FFFFFF);
+  background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF);
+  border-radius: 6px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+}
+.switch-input:checked ~ .switch-handle {
+  left: 74px;
+  box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+ 
+/* Transition
+========================== */
+.switch-label, .switch-handle {
+  transition: All 0.3s ease;
+  -webkit-transition: All 0.3s ease;
+  -moz-transition: All 0.3s ease;
+  -o-transition: All 0.3s ease;
+}
+</style>

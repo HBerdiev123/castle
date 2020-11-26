@@ -1,0 +1,108 @@
+
+{%  extends 'backoffice/base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="content-wrap">
+        <div class="main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 p-0">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <h1>Dashboard</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                    <div class="col-lg-4 p-0">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li><a href="#">Dashboard</a></li>
+                                    <li class="active">Home</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                </div>
+                <!-- /# row -->
+                <div class="main-content">
+
+               
+                {% load temp_filter %}
+
+
+                    {% include 'backoffice/hot_keys.html'  %} 
+
+
+                
+                    {% include 'backoffice/snippets/main_search.html' %}
+
+
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card alert">
+                                <div class="card-header">
+                                    <h4>Properties</h4>
+                                    
+                                </div>
+                            {% include 'backoffice/snippets/list_table.html' %}
+                             <nav aria-label="Page navigation example">
+                             <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    {% if properties.has_previous %}
+                                      <a href="?page=1" class="pager_first">&laquo;</a>
+                                    {% endif %}
+                                </li>
+                                <li class="page-item">
+                                    {% if properties.has_previous %}
+                                      <a href="?page={{ properties.previous_page_number }} " class="page-link">{{properties.previous_page_number}}</a>
+                                    {% endif %}
+
+                                      
+                                </li>
+                                 <li class="page-item active">
+                                  <a class="page-link" href="#"><span class="pager_current active"> {{ properties.number }} </span></a>
+                                </li>
+                                <li class="page-item">
+                                    {% if properties.has_next %}
+                                      <a href="?page={{ properties.next_page_number }}">{{ properties.next_page_number }}</a>
+                                    {% endif %}
+                                </li>
+                                <li class="page-item">
+                                    {% if properties.has_next %}
+                                      <a href="?page={{ properties.paginator.num_pages }}" class="pager_last">&raquo;</a>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </nav>
+                            </div><!-- /# card -->
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <!-- /# column -->
+                       
+                 </div>
+                 <!-- /# card -->
+             </div>
+             <!-- /# column -->
+         </div>
+         <!-- /# row -->
+     </div>
+     <!-- /# main content -->
+ </div>
+ <!-- /# container-fluid -->
+</div>
+<!-- /# main -->
+</div>
+<!-- /# content wrap -->
+
+  
+
+{% endblock %}

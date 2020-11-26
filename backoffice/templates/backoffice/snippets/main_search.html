@@ -1,0 +1,417 @@
+{% load static %}
+<script type='text/javascript' src="{% static 'assets/js/lib/jquery.min.js' %}"></script>
+
+{% if min_bath %}
+{% load temp_filter %}
+
+   <div class="row">
+                <div class="col-lg-12">
+                            <div class="card alert">
+                               <div class="card-header">
+                                    <h4>Search</h4>
+                                   <div class="card-header-right-icon">
+                                        <ul>
+                                            <li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li>
+                                            <li class="card-collapse"><i class="fa fa-window-restore"></i></li>
+                                        </ul>
+                                   </div>
+                               </div>
+                               <div class="card-content" style="display: block;">
+                                    <div class="card-body">
+                                        <div class="basic-elements">
+                                            <form  id="search_form" method="get" action='{% url "backoffice:ajax_search_and_filter" %}' >
+                                            
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                             <div class="input-group input-group-default">
+                                                                <span class="input-group-btn"><button class="btn btn-primary" type="submit"><i class="ti-search"></i></button></span>
+                                                                <input type="text" {% if query %} value="{{query}}" {% endif %} placeholder="Search Default" id="query" name="query" class="form-control">
+                                                             </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                               <select class="form-control"  id="category", name="category">
+                                                                   {% if category %}
+                                                                    <option value="{{category}}" selected='selected' >Property Type:{{category|getpropertycategory|safe }}</option>
+                                                                    {% else %}
+                                                                    <option value="" selected='selected' >Property Type</option>
+                                                                    {% endif %}
+                                                                    <option value="" >All Type</option>
+                                                                    {% for i in property_category %}
+                                                                    <option value='{{i.id}}'>{{i.title}}</option>
+                                                                   {% endfor %}
+                                                                </select>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                 <div class="col-lg-6">
+                                                                    
+                                                                    <div class="form-group">
+                                                               <select class="form-control" id="min_bed" name="min_bed" <select id="min_bed", value="{{min_bed}}" name="min_bed"  >
+                                                              {% if min_bed %} <option value="{{min_bed}}"  >Min Beds: {{min_bed}}</option> {% else %}
+                                                              <option value="1" >Min Beds</option>{% endif %}
+                                                              <option value="1">1</option>
+                                                              <option value="2" >2</option>
+                                                              <option value="3" >3</option>
+                                                              <option value="4" >4</option>
+                                                              <option value="5" >5</option>
+                                                              <option value="6" >6+</option>
+                                                            </select>
+                                                                      </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                     
+                                                                      <div class="form-group">
+                                                                          <select id="min_bath", class="form-control" name="min_bath">
+                                                                         {% if min_bath %}  <option value="{{min_bath}}" class="active">Min Baths: {{min_bath}}</option>{% else %} <option value="1" class="active">Min Baths</option>{% endif %}
+                                                                          <option value="1" >1</option>
+                                                                          <option value="2">2</option>
+                                                                          <option value="3">3</option>
+                                                                          <option value="4">4</option>
+                                                                          <option value="5">5</option>
+                                                                          <option value="6">6+</option>
+                                                                        </select>
+                                                                      </div>
+                                                            </div>
+                                                        </div>
+                                                            <div class="form-group">
+                                                                 <div class="col-lg-6">
+                                                                    
+                                                                      <div class="form-group">
+                                                                          <input type="text" id="min_price"  name="min_price" {% if min_price %} value="{{min_price}}" {% endif %} class="form-control" placeholder="Min Price">
+                                                                      </div>
+                                                                 </div>
+                                                                 <div class="col-lg-6">
+                                                                     
+                                                                      <div class="form-group">
+                                                                           <input id="max_price" name="max_price" type="text" {% if max_price %} value="{{max_price}}" {% endif %}  class="form-control" placeholder="Max Price">
+                                                                      </div>
+                                                                 </div>
+                                                        </div>
+                                                        
+
+                                                    </div>
+                                                       
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                            <select id='purpose' name='purpose' class="form-control">
+                                                              {% if purpose %}
+                                                                <option value="{{purpose}}" selected='selected' >Purpose:{{purpose|getselectedfieldname|safe }}</option>
+                                                              {% else %}
+                                                                <option value="" selected='selected' >Purpose</option>
+                                                              {% endif %}
+                                                                <option value="" >All type</option>
+                                                                 {% for i, v in property_purpose %}
+                                                                  <option value="{{i}}">{{v}}</option>
+                                                                  {% endfor %}
+                                                            </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                            <input type="date" class="form-control" value="{{available_from}}" id="available_from" name="available_from">
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                            <div class="form-group">
+                                                                 <div class="col-lg-6">
+                                                                    
+                                                                      <div class="form-group">
+                                                                          <input type="text" id="min_area"  name="min_area" {% if min_area %} value="{{min_area}}" {% endif %} class="form-control" placeholder="Min Area (sq m)">
+                                                                      </div>
+                                                                 </div>
+                                                                 <div class="col-lg-6">
+                                                                     
+                                                                      <div class="form-group">
+                                                                           <input id="max_area" name="max_area" type="text" {% if max_area %} value="{{max_area}}" {% endif %}  class="form-control" placeholder="Max Area (sq m)">
+                                                                      </div>
+                                                                 </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 form-group float-left">
+                                                        <button class="btn btn-primary m-b-10 m-l-5" type="submit" >Search
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="col-sm-6 form-group float-left">
+                                                       <button class="btn btn-primary btn-addon" data-toggle="modal" data-target="#exampleModalCenter" type="button"><i class="ti-email"></i>Send</button>
+                                                    </div>
+
+                                                <div class="modal fade"  id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                          <h5 class="modal-title" id="exampleModalLongTitle">Send Message</h5>
+                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                           <form>
+                                                              <div class="form-group">
+                                                                <label for="recipient_phone_number"  class="col-form-label">Phone Number:</label>
+                                                                <input type="text" class="form-control" placeholder="Enter Mobile Phone Number"  id="recipient_phone_number">
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label for="recipient_email"  class="col-form-label">Email:</label>
+                                                              <input type="email" class="form-control" placeholder="Enter email" id="recipient_email">
+                                                              </div>
+                                                            </form>
+                                                          
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Schließen</button>
+                                                          <button type="button" data-dismiss="modal" onclick="sendpropertylist()" class="btn btn-success">Send</button>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+
+
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                </div>
+            </div>
+{% else %}
+<div class="row">
+                <div class="col-lg-12">
+                            <div class="card alert">
+                               <div class="card-header">
+                                    <h4>Search</h4>
+                                   <div class="card-header-right-icon">
+                                        <ul>
+                                            <li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li>
+                                            <li class="card-collapse"><i class="fa fa-window-restore"></i></li>
+                                        </ul>
+                                   </div>
+                               </div>
+                               <div class="card-content" style="display: block;">
+                                    <div class="card-body">
+                                        <div class="basic-elements">
+                                            <form  id="search_form" method="get" action='{% url "backoffice:ajax_search_and_filter" %}' >
+                                            
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                             <div class="input-group input-group-default">
+                                                                <span class="input-group-btn"><button class="btn btn-primary" type="submit"><i class="ti-search"></i></button></span>
+                                                                <input type="text" placeholder="Search Default" id="query" name="query" class="form-control">
+                                                             </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                               <select class="form-control" id="category", name="category">
+                                                              
+                                                                       {% if category %}
+                                                                    <option value="{{category}}" selected='selected' >Property Type:{{category|getpropertycategory|safe }}</option>
+                                                                    {% else %}
+                                                                    <option value="" selected='selected' >Property Type</option>
+                                                                    {% endif %}
+                                                                    <option value="" >All Type</option>
+                                                                    {% for i in property_category %}
+                                                                    <option value='{{i.id}}'>{{i.title}}</option>
+                                                                   {% endfor %}
+                                                                </select>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                 <div class="col-lg-6">
+                                                                    
+                                                                    <div class="form-group">
+                                                                           <select class="form-control" id="min_bed" name="min_bed"  >
+                                                                              <option value="" >Min Beds</option> 
+                                                                              <option value="1">1</option>
+                                                                              <option value="2" >2</option>
+                                                                              <option value="3" >3</option>
+                                                                              <option value="4" >4</option>
+                                                                              <option value="5" >5</option>
+                                                                              <option value="6" >6+</option>
+                                                                            </select>
+                                                                      </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                     
+                                                                      <div class="form-group">
+                                                                          <select class="form-control" id="min_bath", name="min_bath">
+                                                                             <option value="1" class="active">Min Baths</option>
+                                                                              <option value="1" >1</option>
+                                                                              <option value="2">2</option>
+                                                                              <option value="3">3</option>
+                                                                              <option value="4">4</option>
+                                                                              <option value="5">5</option>
+                                                                              <option value="6">6+</option>
+                                                                            </select>
+                                                                      </div>
+                                                            </div>
+                                                        </div>
+                                                            <div class="form-group">
+                                                                 <div class="col-lg-6">
+                                                                    
+                                                                      <div class="form-group">
+                                                                          <input type="text" id="min_price"  name="min_price" {% if min_price %} value="{{min_price}}" {% endif %} class="form-control" placeholder="Min Price">
+                                                                      </div>
+                                                                 </div>
+                                                                 <div class="col-lg-6">
+                                                                     
+                                                                      <div class="form-group">
+                                                                           <input id="max_price" name="max_price" type="text" {% if max_price %} value="{{max_price}}" {% endif %}  class="form-control" placeholder="Max Price">
+                                                                      </div>
+                                                                 </div>
+                                                        </div>
+                                                        
+
+                                                    </div>
+                                                       
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                            <select id="purpose" name="purpose" class="form-control">
+                                                                <option value="" class="active">Purpose</option>
+                                                                <option>All</option>
+                                                               {% for key, value in property_purpose %}
+                                                                <option value="{{key}}" {% if property_purpose == key %} selected {% endif %}>{{value}}</option>
+                                                                {% endfor %}
+                                                              </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                            <input type="date" class="form-control" id="available_from" name="available_from">
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                            <div class="form-group">
+                                                                 <div class="col-lg-6">
+                                                                    
+                                                                      <div class="form-group">
+                                                                          <input type="text" id="min_area"  name="min_area" {% if min_area %} value="{{min_area}}" {% endif %} class="form-control" placeholder="Min Area (sq m)">
+                                                                      </div>
+                                                                 </div>
+                                                                 <div class="col-lg-6">
+                                                                     
+                                                                      <div class="form-group">
+                                                                           <input id="max_area" name="max_area" type="text" {% if max_area %} value="{{max_area}}" {% endif %}  class="form-control" placeholder="Max Area (sq m)">
+                                                                      </div>
+                                                                 </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 form-group float-left">
+                                                        <button class="btn btn-primary m-b-10 m-l-5" type="submit" >Search
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="col-sm-6 form-group float-left">
+                                                       <button class="btn btn-primary btn-addon" data-toggle="modal" data-target="#exampleModalCenter" type="button"><i class="ti-email"></i>Send</button>
+                                                    </div>
+
+                                                <div class="modal fade"  id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                          <h5 class="modal-title" id="exampleModalLongTitle">Send Message</h5>
+                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                           <form>
+                                                              <div class="form-group">
+                                                                <label for="recipient_phone_number"  class="col-form-label">Phone Number:</label>
+                                                                <input type="text" class="form-control" placeholder="Enter Mobile Phone Number"  id="recipient_phone_number">
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label for="recipient_email"  class="col-form-label">Email:</label>
+                                                              <input type="email" class="form-control" placeholder="Enter email" id="recipient_email">
+                                                              </div>
+                                                            </form>
+                                                          
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Schließen</button>
+                                                          <button type="button" data-dismiss="modal" onclick="sendpropertylist()" class="btn btn-success">Send</button>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+
+
+
+                                                </div>
+                                            </form>
+                                            
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                </div>
+            </div>
+
+
+{% endif %}
+ <script type="text/javascript">
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                                        // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                                                                              }
+                                                         }
+                                                          }
+                    return cookieValue;
+                                 };
+        var csrftoken = getCookie('csrftoken');
+
+
+        function sendpropertylist() {
+            var query=document.getElementById('query').value;
+            var category=document.getElementById('category').value;
+            var purpose=document.getElementById('purpose').value;
+            var available_from=document.getElementById('available_from').value;   
+            var min_bed=document.getElementById('min_bed').value;
+            var min_bath=document.getElementById('min_bath').value;
+            var min_area=document.getElementById('min_area').value;
+            var max_area=document.getElementById('max_area').value;
+            var min_price=document.getElementById('min_price').value;
+            var max_price=document.getElementById('max_price').value;
+            var recipient_phone_number=document.getElementById('recipient_phone_number').value;
+            var recipient_email=document.getElementById('recipient_email').value;
+            $.ajax({
+                url: '{% url "backoffice:send_property_list" %}',
+                type: "POST",
+                headers: { "X-CSRFTOKEN": csrftoken}, 
+                data: {
+                    'query':query,
+                    'category':category,
+                    'purpose':purpose,
+                    'available_from':available_from,
+                    'min_bed':min_bed,
+                    'min_bath':min_bath,
+                    'min_area':min_area,
+                    'max_area':max_area,
+                    'min_price':min_price,
+                    'max_price':max_price,
+                    'recipient_phone_number':recipient_phone_number,
+                    'recipient_email':recipient_email,
+                       },
+                success: function(data){
+                    console.log(data)
+                    console.log('success')
+                                         
+                                       }
+                  })
+                                          
+                                   };
+</script>

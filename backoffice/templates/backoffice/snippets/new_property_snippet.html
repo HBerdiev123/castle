@@ -1,0 +1,816 @@
+ {% load widget_tweaks %}
+
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="card alert">
+              <div class="card-content" style="display: block;">
+                  <div class="card-body">
+                      <div class="basic-elements">
+                        <form method="POST"  enctype="multipart/form-data">
+                        {% csrf_token %}
+                          <div class="row">
+                            <div class="col-lg-6">
+                             {{ property_form.non_field_errors }}
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                       {{ property_form.available_from.errors }}
+
+                                       <label for="{{ property_form.available_from.id_for_label }}">Available From:</label>
+
+                                      {% render_field property_form.available_from type="date" class="form-control"  %}
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                        {{ property_form.status.errors }}
+                                        <label for="{{ property_form.status.id_for_label }}">Status:</label>
+                                        {% render_field property_form.status type="text" class="form-control"  placeholder="Status" %}                                                  
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {{ property_form.purpose.errors }}
+                                      <label for="{{ property_form.purpose.id_for_label }}">Purpose:</label>
+                                    {% render_field property_form.purpose  class="form-control" %}                                                  
+
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {% load temp_filter %}
+
+                                      {{ property_form.category.errors }}
+                                      <label for="{{ property_form.category.id_for_label }}">Category:</label>
+                                     <select name="category" class="form-control" required="" id="id_category">
+                                     <option value="" selected="">---------</option>                   
+                                      {% for i in property_category %}
+                                               <option value='{{i.id}}'>{{i.id|getpropertycategory|safe }}</option>
+                                       {% endfor %}
+                                         </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {{ property_form.floor.errors }}
+                                      <label for="{{ property_form.floor.id_for_label }}">Floor:</label>
+                                      {{ property_form.floor|add_class:"form-control" }}
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {{ property_form.total_floor.errors }}
+                                      
+                                      <label for="{{ property_form.total_floor.id_for_label }}">Total Floor:</label>
+                                      {{ property_form.total_floor|add_class:"form-control" }}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                {{ property_form.title.errors }}
+                                      
+                                 <label for="{{ property_form.title.id_for_label }}">Title:</label>
+                                 {{ property_form.title|add_class:"form-control" }}
+                                        
+                              </div>
+                              {% comment %}
+                              <div class="form-group">
+                                <input type="text" placeholder="Beschreibung" id="description" name="description" class="form-control">
+                              </div>
+                              {% endcomment %}
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-4">
+                                    <div class="form-group">
+                                      {{ property_form.house_number.errors }}
+                                      
+                                      <label for="{{ property_form.house_number.id_for_label }}">House Number:</label>
+                                      {{ property_form.house_number|add_class:"form-control house_number" }}
+                                      
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-8">
+                                    <div class="form-group">
+                                      {{ property_form.street.errors }}
+                                      
+                                      <label for="{{ property_form.street.id_for_label }}">Street:</label>
+                                      {{ property_form.street|add_class:"form-control" }}
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-12">
+                                  <div class="form-group">
+                                    {{ property_form.city.errors }}
+                                      
+                                    <label for="{{ property_form.city.id_for_label }}">City:</label>
+                                      {{ property_form.city|add_class:"form-control" }}
+                                   
+                                  </div>
+                                </div>
+                                <div class="col-lg-12">
+                                  <div class="form-group">
+                                    {{ property_form.region.errors }}
+                                      
+                                    <label for="{{ property_form.region.id_for_label }}">Region:</label>
+                                      {{ property_form.region|add_class:"form-control" }}
+                                   
+                                    
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <div class="col-lg-4">
+                                    <div class="form-group">
+                                      {{ property_form.postal_Code.errors }}
+                                      
+                                      <label for="{{ property_form.postal_Code.id_for_label }}">Post Code:</label>
+                                      {{ property_form.postal_Code|add_class:"form-control" }}
+                                      
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-8">
+                                    <div class="form-group">
+                                      {{ property_form.country.errors }}
+                                      
+
+                                      <label for="{{ property_form.country.id_for_label }}">Country:</label>
+                                      {{ property_form.country|add_class:"form-control" }}
+                                     
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <div class="col-lg-12">
+                                    <div class="form-group">
+                                      <button class="btn btn-primary " onclick="find_coordinates(); return false" >Finden Sie Breite und Längengrad</button>
+                                    </div>
+                                  </div>
+                                </div>  
+                                <div class="form-group">
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {{ property_form.latitude.errors }}
+                                      
+
+                                      <label for="{{ property_form.latitude.id_for_label }}">Latitude:</label>
+                                      {{ property_form.latitude|add_class:"form-control" }}
+
+                                      
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {{ property_form.longitude.errors }}
+                                      
+
+                                      <label for="{{ property_form.longitude.id_for_label }}">Longitude:</label>
+                                      {{ property_form.longitude|add_class:"form-control" }}
+
+                                    
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      
+                                      {{ property_form.bedroom.errors }}
+                                      
+                                      <label for="{{ property_form.bedroom.id_for_label }}">Bedroom:</label>
+                                      {{ property_form.bedroom|add_class:"form-control" }}
+                                      
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {{ property_form.bathroom.errors }}
+                                      
+
+                                      <label for="{{ property_form.bathroom.id_for_label }}">Bathroom:</label>
+                                      {{ property_form.bathroom|add_class:"form-control" }}
+                                      
+                                     
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {{ property_form.size.errors }}
+                                      
+
+                                      <label for="{{ property_form.size.id_for_label }}">Size:</label>
+                                      {{ property_form.size|add_class:"form-control" }}
+                                      
+                                    
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {{ property_form.price.errors }}
+                                      
+
+                                      <label for="{{ property_form.price.id_for_label }}">Price:</label>
+                                      {{ property_form.price|add_class:"form-control" }}
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>    
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {{ property_form.year_built.errors }}
+                                      
+
+                                      <label for="{{ property_form.year_built.id_for_label }}">Year Built:</label>
+                                      {{ property_form.year_built|add_class:"form-control" }}
+                                     
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {{ property_form.garage.errors }}
+                                      
+
+                                      <label for="{{ property_form.garage.id_for_label }}">Garage:</label>
+                                      {{ property_form.garage|add_class:"form-control" }}
+                                    
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {{ property_form.internet.errors }}
+                                      
+
+                                      <label for="{{ property_form.internet.id_for_label }}">Internet:</label>
+                                     {{ property_form.internet|add_class:"form-control" }}
+                                     
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      {{ property_form.pet_policy.errors }}
+                                      
+
+                                      <label for="{{ property_form.pet_policy.id_for_label }}">Pet Policy:</label>
+                                        {{ property_form.pet_policy|add_class:"form-control" }}
+                                       </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div id="map" class="multiple-location-map" style="width:100%; top:0; bottom:0;">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <div class="form-group">   
+                                 {{ property_form.feature.errors }}
+                                      
+
+                                 <label for="{{ property_form.feature.id_for_label }}">Feature:</label>
+                                 {% render_field property_form.feature|add_class:"form-check" %}
+                                </div>
+                              </div>
+                            </div>
+                             <div class="row">
+                              <div class="col-lg-12">
+                                <div class="form-group">   
+                                 
+                                 {{ property_form.featured.errors }}
+                                      
+                                 <label for="{{ property_form.featured.id_for_label }}">Featured:</label>
+                                 {% render_field property_form.featured|add_class:"form-check" %}
+                                </div>
+                              </div>
+                            </div>  
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <div class="form-group">
+                                  {% comment %}
+                                 {{ formset.management_form }}
+                                  {% for i in formset %}
+                                       <div id='picture_field'>
+                                          <div class="input-group input-group-default">
+                                          <span class="input-group-btn"><button class="btn btn-danger"><i class="ti-trash"></i></button></span>
+                                                                    
+                                   {% render_field i.picture|add_class:"form-control" %}
+
+                                   
+                                    <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
+
+                                      </div>
+                                  {# {% endfor %} #}
+                                  {% endcomment %}
+
+                                  <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
+                                <div id="fileList">                            
+                                 <div>
+                                  {{ formset.management_form }}
+                                  {% for i in formset %}
+                                     {% render_field i.picture|add_class:"form-control" %}
+                                                            
+                                      <label for="id_picture_set-0-picture"><div class="btn btn-primary ">Upload Image</div></label>  
+                                       {% endfor %}    
+                                    </div>
+                                  </div>   
+                                </div>
+                                <div id='picture_field'></div>
+                              </div>
+                                 
+
+                            </div>  
+                           
+
+                            <div class="row">
+                              <div class="col-lg-12">
+                                {% comment %}
+                                <fieldset class="form-group">
+                                   <a href="javascript:void(0)" onclick="$('#pro-image').click()"><div class="btn btn-primary ">Upload Image</div></a>
+                                </fieldset>
+                                {% endcomment %}
+                                <div class="preview-images-zone">
+                                    {% for i in images %}
+                                    <div class="preview-image preview-show-{{i.id}}">
+                                        <div class="image-cancel" data-no="{{i.id}}">x</div>
+                                        <div class="image-zone"><img id="pro-img-{{i.id}}" src="{{i.picture.url}}"></div>
+                                        <div class="tools-edit-image"><a href="javascript:void(0)" data-no="{{i.id}}" class="btn btn-light btn-edit-image">edit</a></div>
+                                    </div>
+                                    {% endfor %}
+                                   
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <div class="form-group">
+                                  <div class="row">
+                                    {{ property_form.description.errors }}
+                                      
+                                    <label for="{{ property_form.description.id_for_label }}">Description:</label>
+                                  </div>{{ property_form.media }}
+                                {{ property_form.description }}
+                                </div>
+                              </div>
+                            </div>  
+                 <div id="fileList">
+          
+
+
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+
+
+
+<script type="text/javascript">
+var upload=document.getElementById("id_picture_set-0-picture");
+var array=["image/jpg", "image/png", "image/jpeg", "image/tif", "image/tiff",];
+upload.accept=array;
+var fileInput = document.getElementById('id_picture_set-0-picture');
+var filesList =  document.getElementById('fileList');  
+var idBase = "id_picture_set-";
+var idCount = 0;
+
+var inputFileOnChange = function() {
+
+  var existingLabel = this.parentNode.getElementsByTagName("LABEL")[0];
+  var isLastInput = existingLabel.childNodes.length<=1;
+
+  if(!this.files[0]) {
+    if(!isLastInput) {
+      this.parentNode.parentNode.removeChild(this.parentNode);
+    }
+    return;
+  }
+
+  var filename = this.files[0].name;
+
+  var deleteButton = document.createElement('span');
+  deleteButton.innerHTML = '&times;';
+  deleteButton.onclick = function(e) {
+    this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+  }
+  var filenameCont = document.createElement('span');
+  filenameCont.innerHTML = filename;
+  existingLabel.innerHTML = "";
+  existingLabel.appendChild(filenameCont);
+  existingLabel.appendChild(deleteButton);
+  
+  if(isLastInput) { 
+    var newFileInput=document.createElement('input');
+    newFileInput.type="file";
+    newFileInput.name="id_picture_set-"+(++idCount)/2+"-picture";
+    newFileInput.id=idBase + (++idCount)/2+'-picture';
+    console.log('===============')
+    console.log(newFileInput.id)
+    console.log('========')
+    newFileInput.onchange=inputFileOnChange;
+    var newLabel=document.createElement('label');
+    newLabel.htmlFor = newFileInput.id;
+    newLabel.innerHTML = '<div class="btn btn-primary ">Upload Image</div>';
+    var newDiv=document.createElement('div');
+    newDiv.appendChild(newFileInput);
+    newDiv.appendChild(newLabel);
+    filesList.appendChild(newDiv);
+  } 
+}
+
+fileInput.onchange=inputFileOnChange;
+
+
+
+  
+
+
+
+</script>
+
+<style type="text/css">
+  #fileList > div > label > span:last-child {
+  color: red;
+  display: inline-block;
+  margin-left: 7px;
+  cursor: pointer;
+}
+#fileList input[type=file] {
+  display: none;
+}
+#fileList > div:last-child > label {
+  display: inline-block;
+  width: 23px;
+  height: 23px;
+  font: 16px/22px Tahoma;
+  color: orange;
+  text-align: center;
+  border: 2px solid orange;
+  border-radius: 50%;
+}
+</style>
+
+<script type="text/javascript">
+
+</script>
+  <output id='result' />
+
+<style type="text/css">
+  body {
+  font-family: ‘Segoe UI’;
+  font-size: 12pt;
+}
+
+header h1 {
+  font-size: 12pt;
+  color: #fff;
+  background-color: #1BA1E2;
+  padding: 20px;
+}
+
+article {
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.thumbnail {
+  height: 100px;
+  margin: 10px;
+}
+</style>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    document.getElementById('pro-image').addEventListener('change', readImage, false);
+    
+    $( ".preview-images-zone" ).sortable();
+    
+    $(document).on('click', '.image-cancel', function() {
+        let no = $(this).data('no');
+        console.log(no)
+        $.ajax({
+            url: '{% url "backoffice:delete_property_picture" %}',
+            type: "POST",
+            dataType: "json",
+           
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+                      },
+             data: {
+                   'pk': no,
+                   },
+                                                    
+             success: function(data){
+                if(data.status='deleted'){
+                   $(".preview-image.preview-show-"+no).remove();
+                                         }
+                                          
+                                       }
+                      })
+        
+    });
+});
+
+
+
+var num = 0;
+function readImage() {
+    if (window.File && window.FileList && window.FileReader) {
+        var files = event.target.files; //FileList object
+        var output = $(".preview-images-zone");
+
+        for (let i = 0; i < files.length; i++) {
+            var file = files[i];
+            if (!file.type.match('image')) continue;
+            
+            var picReader = new FileReader();
+            
+            picReader.addEventListener('load', function (event) {
+                var picFile = event.target;
+                 var html='<div class="input-group input-group-default" style="visibility:hidden"><span class="input-group-btn"><button id="'+num+'" class="btn btn-danger" ><i class="ti-trash"></i></button></i></span> <input type="file" class="files" name="picture_set-'+num+'-picture[]" ></div>'+
+                 '<div class="preview-image preview-show-' + num + '">' +
+                            '<div class="image-cancel" data-no="' + num + '">x</div>' +
+                            '<div class="image-zone"><img id="picture_set-'+num+'-picture" src="' + picFile.result + '"></div>' +
+                            '<div class="tools-edit-image"><a href="javascript:void(0)" data-no="' + num + '" class="btn btn-light btn-edit-image">edit</a></div>' +
+                            '</div>';
+
+                output.append(html);
+                num = num + 1;
+            });
+
+            picReader.readAsDataURL(file);
+        }
+        $("#pro-image").val('');
+    } else {
+        console.log('Browser not support');
+    }
+}
+
+
+
+
+
+</script>
+
+                          <button class="btn btn-primary m-b-10 m-l-5" type="submit">submit</button>
+
+                          </form>
+                        
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                </div>
+            </div>
+  <style>
+        html, body, #map {
+            width: 100%; height: 90%; padding: 0; margin: 0;
+        }
+    </style>
+              <script src="https://api-maps.yandex.ru/2.1/?apikey=cc06771e-7a07-4638-8572-f6bc9dc3d361&lang=en_US" type="text/javascript"></script>
+
+<script type="text/javascript">
+  
+function find_coordinates() {
+let house_number = document.getElementById("id_house_number").value;
+let street = document.getElementById("id_street").value;
+let city = document.getElementById("id_city").value;
+let region = document.getElementById("id_region").value;
+let postal_Code = document.getElementById("id_postal_Code").value;
+let country = document.getElementById("id_country").value;
+
+var new_address=house_number.concat(' ', street, " ", city, " ", region, " ", postal_Code, " ", country);
+$("#map").html('');
+
+ymaps.ready(init);
+function init() {
+    var myMap = new ymaps.Map("map", {
+            center: [51.028351, 7.565430],
+            zoom: 10
+        }, {
+            searchControlProvider: 'yandex#search'
+        });
+ 
+myMap.events.add('dragend', function(e) {
+   // Getting a reference to an object that was dragged.
+   var thisPlacemark = e.get('target');
+   // Determining the placemark coordinates
+   var coords = thisPlacemark.geometry.getCoordinates();
+   // and outputting them when the placemark is clicked
+   thisPlacemark.properties.set('balloonContent', coords);
+});
+ymaps.geocode(new_address, {
+        /**
+         * Request options
+         * @see https://api.yandex.com/maps/doc/jsapi/2.1/ref/reference/geocode.xml
+          */
+        /**
+         * Sorting the results from the center of the map window
+         *  boundedBy: myMap.getBounds(),
+         *  strictBounds: true,
+         *  Together with the boundedBy option, the search will be strictly inside the area specified in boundedBy.
+         *  If you need only one result, this will minimize the user's traffic.
+         */
+        results: 1
+    }).then(function (res) {
+            // Selecting the first result of geocoding.
+            var firstGeoObject = res.geoObjects.get(0),
+                // The coordinates of the geo object.
+                coords = firstGeoObject.geometry.getCoordinates(),
+                // The viewport of the geo object.
+                bounds = firstGeoObject.properties.get('boundedBy');
+
+            firstGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
+            // Getting the address string and displaying it in the geo object icon.
+            firstGeoObject.properties.set('iconCaption', firstGeoObject.getAddressLine());
+
+            // Adding first found geo object to the map.
+            myMap.geoObjects.add(firstGeoObject);
+            // Scaling the map to the geo object viewport.
+            myMap.setBounds(bounds, {
+                // Checking the availability of tiles at the given zoom level.
+                checkZoomRange: true
+            });
+            coordinates_array=firstGeoObject.geometry.getCoordinates();
+            latitude=coordinates_array[0];
+            longitude=coordinates_array[1];
+            document.getElementById("id_latitude").value = latitude;
+            document.getElementById("id_longitude").value = longitude;
+
+
+            
+            /**
+             * All data in the form of a javascript object.
+             */
+            console.log('All the geo object data: ', firstGeoObject.properties.getAll());
+            /**
+             * The metadata of the request and geocoder response.
+             * @see https://api.yandex.com/maps/doc/geocoder/desc/reference/GeocoderResponseMetaData.xml
+              */
+            console.log('The metadata of the geocoder response: ', res.metaData);
+            /**
+             * Metadata of the geocoder returned for the found object.
+             * @see https://api.yandex.com/maps/doc/geocoder/desc/reference/GeocoderMetaData.xml
+              */
+            console.log('Geocoder metadata: ', firstGeoObject.properties.get('metaDataProperty.GeocoderMetaData'));
+            /**
+             * The accuracy of the response (precision) is only returned for houses.
+             * @see https://api.yandex.com/maps/doc/geocoder/desc/reference/precision.xml
+              */
+            console.log('precision', firstGeoObject.properties.get('metaDataProperty.GeocoderMetaData.precision'));
+            /**
+             * The type of found object (kind).
+             * @see https://api.yandex.com/maps/doc/geocoder/desc/reference/kind.xml
+              */
+            console.log('Type of geo object: %s', firstGeoObject.properties.get('metaDataProperty.GeocoderMetaData.kind'));
+            console.log('Object name: %s', firstGeoObject.properties.get('name'));
+            console.log('Object description: %s', firstGeoObject.properties.get('description'));
+            console.log('Full object description: %s', firstGeoObject.properties.get('text'));
+            /**
+            * Direct methods for working with the geocoding results.
+            * @see https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/GeocodeResult-docpage/#getAddressLine
+             */
+            console.log('\nState: %s', firstGeoObject.getCountry());
+            console.log('Municipality: %s', firstGeoObject.getLocalities().join(', '));
+            console.log('Address of the object: %s', firstGeoObject.getAddressLine());
+            console.log('Name of the building: %s', firstGeoObject.getPremise() || '-');
+            console.log('Building number: %s', firstGeoObject.getPremiseNumber() || '-');
+
+            /**
+             * To add a placemark with its own styles and balloon content at the coordinates found by the geocoder, create a new placemark at the coordinates of the found placemark and add it to the map in place of the found one.
+             */
+            /**
+             var myPlacemark = new ymaps.Placemark(coords, {
+             iconContent: 'my placemark',
+             balloonContent: 'Content of the <strong>my placemark</strong> balloon'
+             }, {
+             preset: 'islands#violetStretchyIcon'
+             });
+
+             myMap.geoObjects.add(myPlacemark);
+             */
+        });
+ 
+        
+}
+  
+}
+</script>
+
+
+
+<script type="text/javascript">
+
+ymaps.ready(init);
+function init() {
+    var myMap = new ymaps.Map("map", {
+            center: [51.028351, 7.565430],
+            zoom: 10
+        }, {
+            searchControlProvider: 'yandex#search'
+        });
+ 
+
+}
+
+              </script>
+
+
+
+
+<style type="text/css">
+  .preview-images-zone {
+    width: 100%;
+    border: 1px solid #ddd;
+    min-height: 180px;
+    /* display: flex; */
+    padding: 5px 5px 0px 5px;
+    position: relative;
+    overflow:auto;
+}
+.preview-images-zone > .preview-image:first-child {
+    height: 185px;
+    width: 185px;
+    position: relative;
+    margin-right: 5px;
+}
+.preview-images-zone > .preview-image {
+    height: 90px;
+    width: 90px;
+    position: relative;
+    margin-right: 5px;
+    float: left;
+    margin-bottom: 5px;
+}
+.preview-images-zone > .preview-image > .image-zone {
+    width: 100%;
+    height: 100%;
+}
+.preview-images-zone > .preview-image > .image-zone > img {
+    width: 100%;
+    height: 100%;
+}
+.preview-images-zone > .preview-image > .tools-edit-image {
+    position: absolute;
+    z-index: 100;
+    color: #fff;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    display: none;
+}
+.preview-images-zone > .preview-image > .image-cancel {
+    font-size: 18px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+    display: none;
+    z-index: 100;
+}
+.preview-image:hover > .image-zone {
+    cursor: move;
+    opacity: .5;
+}
+.preview-image:hover > .tools-edit-image,
+.preview-image:hover > .image-cancel {
+    display: block;
+}
+.ui-sortable-helper {
+    width: 90px !important;
+    height: 90px !important;
+}
+
+.container {
+    padding-top: 50px;
+}
+
+</style>

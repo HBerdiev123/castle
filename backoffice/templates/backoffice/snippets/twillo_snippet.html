@@ -1,0 +1,98 @@
+ {% load widget_tweaks %}
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="card alert">
+              <div class="card-content" style="display: block;">
+                  <div class="card-body">
+                      <div class="basic-elements">
+                       <form method="POST"  enctype="multipart/form-data">
+                        {% csrf_token %}
+                          <div class="row">
+                            <div class="col-lg-6">
+                             <div class="row">
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-8">
+                                    <div class="form-group">
+                                      <label for="{{ twillo_form.title.id_for_label }}">Title:</label>
+                                      {{ twillo_form.title|add_class:"form-control" }}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-8">
+                                    <div class="form-group">
+                                      <label for="{{ twillo_form.user.id_for_label }}">User:</label>
+                                      {{ twillo_form.user|add_class:"form-control" }}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-8">
+                                    <div class="form-group">
+                                      <label for="{{ twillo_form.twillo_account.id_for_label }}">Twillo Account:</label>
+                                      {{ twillo_form.twillo_account|add_class:"form-control" }}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-8">
+                                    <div class="form-group">
+                                      <label for="{{ twillo_form.twillo_token.id_for_label }}">twillo Token:</label>
+                                      {{ twillo_form.twillo_token|add_class:"form-control" }}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                               <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-8">
+                                    <div class="form-group">
+                                      <label for="{{ twillo_form.twillo_number.id_for_label }}">Twillo Number:</label>
+                                      {{ twillo_form.twillo_number|add_class:"form-control" }}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                               <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-8">
+                                    <div class="form-group">
+                                      <label for="{{ twillo_form.default_twillo.id_for_label }}">Default_twillo:</label>
+                                      {{ twillo_form.default_twillo|add_class:"form-control" }}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                            <div class="row">
+                                <div class="form-group">
+                                      <div class="col-lg-8">
+                                         <div class="form-group">
+                                         <button class="btn btn-primary m-b-10 m-l-5" type="submit">submit</button>
+                                          </div>                                                  
+                                      </div>
+                                </div>
+                            
+                            </div>
+                           </div> 
+                        </form>
+                       
+
+                      
+                        
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                </div>
+            </div>
+ 
+      
+

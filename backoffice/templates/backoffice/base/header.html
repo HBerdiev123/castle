@@ -1,0 +1,136 @@
+  {% load static %}
+
+  <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+        <div class="nano">
+            <div class="nano-content">
+                <ul>
+                    <li class="active">
+                        <a class="sidebar-sub-toggle " href="backoffice/index"><i class="ti-home"></i> Dashboard <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="{% url 'backoffice:index' %}">Dashboard 1</a></li>
+                             
+                        </ul>
+                    </li>
+
+                      <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-view-list-alt"></i> Eigentum verwalten<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="{% url 'backoffice:new_property' %}">Eigenschaft erstellen</a></li>
+                            <li><a href="{% url 'backoffice:index' %}">Eigenschaftsliste</a></li>
+                            <li><a href="{% url 'backoffice:allproperty' %}">Alle</a></li>
+
+                            
+                        </ul>
+                    </li>
+                      
+                    <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-email"></i> Meldung<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="{% url 'backoffice:show_new_messages' %}">Neue Meldungen</a></li>
+                            <li><a href="{% url 'backoffice:all_messages' %}">Alle Meldungen</a></li>
+
+                            
+                        </ul>
+                    </li>
+
+                     <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-panel"></i> Eigenschaften<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="{% url 'backoffice:create_feature' %}">Eigenschaften Erzeugen </a></li>
+                            <li><a href="{% url 'backoffice:features' %}">Alle Eigenschaften</a></li>
+
+                            
+                        </ul>
+                    </li>
+
+
+                     <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-layout-grid4-alt"></i> Immobilienkategorie<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="{% url 'backoffice:create_property_category' %}">Eigenschaften Erzeugen </a></li>
+                            <li><a href="{% url 'backoffice:property_categories' %}">Alle Eigenschaften</a></li>
+
+                            
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-mobile"></i>Kontakt Nummer<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="{% url 'backoffice:create_contact_number' %}">Erstellen </a></li>
+                            <li><a href="{% url 'backoffice:contact_number' %}">Kontaktnummern</a></li>
+
+                            
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-menu-alt"></i>Social Contacts<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="{% url 'backoffice:create_social_contact' %}">Erstellen </a></li>
+                            <li><a href="{% url 'backoffice:social_contact' %}">Social Contacts</a></li>
+
+                            
+                        </ul>
+                    </li>
+                     <li>
+                        <a class="sidebar-sub-toggle"><i class="ti-signal"></i>Twillo<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            <li><a href="{% url 'backoffice:create_twillo' %}">Erstellen </a></li>
+                            <li><a href="{% url 'backoffice:twillo' %}">Twillo</a></li>
+
+                            
+                        </ul>
+                    </li>
+
+
+
+                                    
+                    <li><a><i class="ti-close"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /# sidebar -->
+    <div class="header">
+        <div class="pull-left">
+            <div class="logo">
+                <a href="{% url 'backoffice:index' %}">
+                    <span class="user-avatar">Backoffice</span>
+                </a>
+            </div>
+            <div class="hamburger sidebar-toggle">
+                <span class="ti-menu"></span>
+            </div>
+        </div>
+        <div class="pull-right p-r-15">
+            <ul>
+              {% load temp_filter %}
+
+                <li class="header-icon dib">
+                    <i class="ti-email"></i>
+                    <div class="note-count">{{1|getunreadmessages|safe }}</div>
+                    <div class="drop-down">
+                        <div class="dropdown-content-heading">
+                            <a href="{% url 'backoffice:show_new_messages' %}"><span class="text-left">{{1|getunreadmessages|safe }} New Messages</span></a>
+                            <a href="{% url 'backoffice:show_new_messages' %}"><i class="ti-pencil-alt pull-right"></i></a>
+                        </div>
+                                    </div>
+                </li>
+                <li class="header-icon dib">
+                     <span class="user-avatar">{{ request.user.username }} <i class="ti-angle-down f-s-10"></i></span>
+                    <div class="drop-down dropdown-profile">
+                        <div class="dropdown-content-heading">
+                            
+                        </div>
+                        <div class="dropdown-content-body">
+                            <ul>
+                               
+                                <li><a href="#"><i class="ti-power-off"></i> <span>Logout</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+ 

@@ -1,0 +1,19 @@
+ var html='<div class="input-group input-group-default" style="visibility:hidden"><span class="input-group-btn"><button id="'+num+'" class="btn btn-danger" ><i class="ti-trash"></i></button></i></span> <input type="file" class="files" name="picture_set-'+num+'-picture[]" id="picture_set-'+num+'-picture"></div>'+
+                 '<div class="preview-image preview-show-' + num + '">' +
+                            '<div class="image-cancel" data-no="' + num + '">x</div>' +
+                            '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' +
+                            '<div class="tools-edit-image"><a href="javascript:void(0)" data-no="' + num + '" class="btn btn-light btn-edit-image">edit</a></div>' +
+                            '</div>';
+
+
+
+
+
+
+
+ console.log(file.name)
+                console.log(num)
+                 html='<div class="input-group input-group-default" style="visibility:hidden"><span class="input-group-btn"><button id="'+num+'" class="btn btn-danger" ><i class="ti-trash"></i></button></i></span> <input type="file" class="files" value="'+file.name+'" name="picture_set-'+num+'-picture[]" ></div>';
+                $('#picture_field').append(html);
+
+                              <input type="file" name="picture_set-0-picture" style="display: none;" equired="false" class="form-control " id="id_picture_set-0-picture" multiple>

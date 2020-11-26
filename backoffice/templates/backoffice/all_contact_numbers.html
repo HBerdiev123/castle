@@ -1,0 +1,60 @@
+
+{%  extends 'backoffice/base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+  
+    <div class="content-wrap">
+        <div class="main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 p-0">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <h1>Dashboard</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                    <div class="col-lg-4 p-0">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li><a href="#">Dashboard</a></li>
+                                    <li class="active">Home</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                </div>
+                <!-- /# row -->
+                <div class="main-content">
+                    <div class="row">     
+                        <div class="col-lg-12">
+                            <div class="card alert">
+                                <div class="card-header">
+                                    <h4>Contacts</h4>
+                                   
+                                </div>
+                            {% include 'backoffice/snippets/contact_number_list_table.html' %}
+                            </div><!-- /# card -->
+                        </div>
+                    </div>
+
+
+             </div>
+             <!-- /# column -->
+         </div>
+         <!-- /# row -->
+     </div>
+     <!-- /# main content -->
+ </div>
+ <!-- /# container-fluid -->
+</div>
+<!-- /# main -->
+</div>
+<!-- /# content wrap -->
+
+{% endblock %}

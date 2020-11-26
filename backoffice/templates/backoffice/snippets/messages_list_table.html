@@ -1,0 +1,487 @@
+{% load static %}
+
+    <div id='list_table' class="card-body">
+      <table class="table table-responsive table-hover ">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Created</th>
+            <th></th>
+            <th>        </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for message in message_form %}
+            <tr id="tr_{{message.id}}">
+              <th  scope="row">{{message.id}}</th>
+                  <td>{{message.full_name}}</td>
+                  <td>{{message.phone_number}}</td>
+                  <td>{{message.email}}</td>
+                  <td>{{message.created}}</td>
+                  <td><div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse{{message.id}}" aria-expanded="false" aria-controls="collapseThree">
+                        View
+                      </button>
+                    </h5></div>
+                  </td>
+                  <td>  <input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token }}' />        
+                    <a href="/backoffice/features/{{message.id}}"><button  type="button"  class="btn btn-info ti-settings"></button></a><button    data-toggle="modal" data-target="#exampleModalCenter{{message.id}}" onclick="getId(); return false" id="{{message.id}}" type="button"  class="btn btn-danger ti-trash"></button>
+                  </td>
+                  <div class="modal fade"  id="exampleModalCenter{{message.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Löschen</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Bist du sicher, das du das löschen möchtest?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">Schließen</button>
+                          <button type="button" data-dismiss="modal" onclick="deleteFeature(); return false" id="{{message.id}}"  class="btn btn-danger">Löschen</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </tr>
+            <tr id="collapse{{message.id}}" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+              <td class="card-body"  colspan="12">
+                <div class="messaging">
+                   <div class="inbox_msg">
+                     <div class="mesgs">
+                        <div class="incoming_msg">
+                            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                            <div class="received_msg">
+                              <div class="received_withd_msg">
+                                 <p>{{message.message}}</p>
+                                 <span class="time_date">{{message.created}} </span>
+                              </div>
+                            </div>
+                        </div>
+                       
+                        <div id='reply_message_field_{{message.id}}'></div>
+       
+       
+
+                       <form id='send_message'>
+                         {% csrf_token %}
+                         <div class="form-group">
+                            <label>Antworten</label>
+                            <textarea class="form-control" rows="3" id="reply_message_{{message.id}}"></textarea>
+                         </div>
+                        <div class="form-group" style="display: none;">
+                            <label>title</label>
+                            <input type="text" value="Reply" name="title" class="form-control" id="title">
+                        </div>
+                        <div style="display: none;"class="form-group">
+                          <label>Message Id</label>
+                            <input type="text" class="form-control" value="{{message.id}}"  readonly="" id="message_{{message.id}}">
+                         </div>
+                         <div class="form-group">
+                            <button class="btn btn-primary btn-addon" id="sendbutton_{{message.id}}" onclick="sendMessage({{message.id}}); return false" type="button"><i class="ti-email"></i>Antworten</button>
+                         </div>
+
+                      </form>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="col-lg-3"></div>
+                      <img src="..." class="rounded float-left" alt="...">
+                        <div class="col-lg-9" >
+                          <div class="row property-d-table bottom40">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <table class="table table-striped table-responsive">
+                                <tbody>
+                                  <tr>
+                                    <td><b>Property Id {{message.properties.id}}</b></td>
+                                    <td class="text-right">{{message.properties.id}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Price</b></td>
+                                    <td class="text-right">${{message.properties.price}} / month</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Property Size</b></td>
+                                    <td class="text-right">{{message.properties.size}} sq. m</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Bedrooms</b></td>
+                                    <td class="text-right">{{message.properties.bedroom}}</td>
+                                  </tr>
+                                    <tr>
+                                      <td><b>Bathrooms</b></td>
+                                      <td class="text-right">{{message.properties.bathroom}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Available From</b></td>
+                                      <td class="text-right">{{message.properties.available_from}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table class="table table-striped table-responsive">
+                                  <tbody>
+                                    <tr>
+                                      <td><b>Status</b></td>
+                                      <td class="text-right">{{message.properties.status}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Year Built</b></td>
+                                      <td class="text-right">{{message.properties.year_built}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Garages</b></td>
+                                      <td class="text-right">{{message.properties.garage}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Cross Streets</b></td>
+                                      <td class="text-right">{{message.properties.id}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Floors</b></td>
+                                      <td class="text-right">Carpet - Ceramic Tile</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Plumbing</b></td>
+                                      <td class="text-right">Full Copper Plumbing</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>                            
+                        </div>
+                      </div>
+                    </td>
+                  </tr>  
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <script type='text/javascript' src="{% static 'assets/js/lib/jquery.min.js' %}"></script>
+           {% csrf_token %}
+                          <script type="text/javascript">
+                            function getCookie(name) {
+                                var cookieValue = null;
+                                if (document.cookie && document.cookie != '') {
+                                    var cookies = document.cookie.split(';');
+                                    for (var i = 0; i < cookies.length; i++) {
+                                        var cookie = jQuery.trim(cookies[i]);
+                                        // Does this cookie string begin with the name we want?
+                                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                            break;
+                                        }
+                                    }
+                                }
+                                return cookieValue;
+                            };
+                            var csrftoken = getCookie('csrftoken');
+                            function deleteFeature(e) {
+                                  var get_id=event.srcElement.id;
+
+                                   console.log(get_id)
+                                        $.ajax({
+                                            url: '{% url "backoffice:delete_message" %}',
+                                            type: "POST",
+                                            dataType: "json",
+                                            headers: {//<==
+                                                    "X-CSRFTOKEN": csrftoken,
+                                            },
+                                             beforeSend: function (xhr) {
+                                                xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+                                            },
+                                            data: {
+                                                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                                                'pk': get_id,
+                                                },
+                                                    
+                                           success: function(data){
+                                            if(data.status='deleted'){
+                                              document.getElementById('tr_'+get_id).style.display='none';
+
+                                            }
+                                           
+                                        }
+                                        })
+                                    };
+
+                               
+                                function sendMessage(id) {
+                                  var reply_message=document.getElementById('reply_message_'+id).value;
+                                  var message=document.getElementById('message_'+id).value;
+                                  var title='testing';
+                                  //var title=document.getElementById('message').value;
+                                  console.log(reply_message)
+                                    $.ajax({
+                                            url: '{% url "backoffice:show_new_messages" %}',
+                                            type: "POST",
+                                           
+                                            
+                                             beforeSend: function (xhr) {
+                                                xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+                                                document.getElementById("sendbutton_"+id).disabled = true;
+                                            },
+                                            data: {
+                                                'reply_message':reply_message,
+                                                'message':message,
+                                                'title':title,
+
+                                                },
+                                                    
+                                           success: function(data){
+                                            $("#reply_message_field_"+id).html(data);
+                                            document.getElementById("sendbutton_"+id).disabled = false;
+                                            
+                                           
+                                        },
+                                          error:function (errorData) {
+                               document.getElementById("sendbutton_"+id).disabled = false;
+                                         
+                                         } 
+                                        })
+                                    };
+
+
+                    
+                            </script>
+
+
+<style type="text/css">
+  /*---------chat window---------------*/
+.container{
+    max-width:900px;
+}
+.inbox_people {
+  background: #fff;
+  float: left;
+  overflow: hidden;
+  width: 30%;
+  border-right: 1px solid #ddd;
+}
+
+.inbox_msg {
+  border: 1px solid #ddd;
+  clear: both;
+  overflow: hidden;
+}
+
+.top_spac {
+  margin: 20px 0 0;
+}
+
+.recent_heading {
+  float: left;
+  width: 40%;
+}
+
+.srch_bar {
+  display: inline-block;
+  text-align: right;
+  width: 60%;
+  padding:
+}
+
+.headind_srch {
+  padding: 10px 29px 10px 20px;
+  overflow: hidden;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.recent_heading h4 {
+  color: #0465ac;
+    font-size: 16px;
+    margin: auto;
+    line-height: 29px;
+}
+
+.srch_bar input {
+  outline: none;
+  border: 1px solid #cdcdcd;
+  border-width: 0 0 1px 0;
+  width: 80%;
+  padding: 2px 0 4px 6px;
+  background: none;
+}
+
+.srch_bar .input-group-addon button {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  padding: 0;
+  color: #707070;
+  font-size: 18px;
+}
+
+.srch_bar .input-group-addon {
+  margin: 0 0 0 -27px;
+}
+
+.chat_ib h5 {
+  font-size: 15px;
+  color: #464646;
+  margin: 0 0 8px 0;
+}
+
+.chat_ib h5 span {
+  font-size: 13px;
+  float: right;
+}
+
+.chat_ib p {
+    font-size: 12px;
+    color: #989898;
+    margin: auto;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chat_img {
+  float: left;
+  width: 11%;
+}
+
+.chat_img img {
+  width: 100%
+}
+
+.chat_ib {
+  float: left;
+  padding: 0 0 0 15px;
+  width: 88%;
+}
+
+.chat_people {
+  overflow: hidden;
+  clear: both;
+}
+
+.chat_list {
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+  padding: 18px 16px 10px;
+}
+
+.inbox_chat {
+  height: 550px;
+  overflow-y: scroll;
+}
+
+.active_chat {
+  background: #e8f6ff;
+}
+
+.incoming_msg_img {
+  display: inline-block;
+  width: 6%;
+}
+
+.incoming_msg_img img {
+  width: 100%;
+}
+
+.received_msg {
+  display: inline-block;
+  padding: 0 0 0 10px;
+  vertical-align: top;
+  width: 92%;
+}
+
+.received_withd_msg p {
+  background: #ebebeb none repeat scroll 0 0;
+  border-radius: 0 15px 15px 15px;
+  color: #646464;
+  font-size: 14px;
+  margin: 0;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+}
+
+.time_date {
+  color: #747474;
+  display: block;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
+.received_withd_msg {
+  width: 80%;
+}
+
+.mesgs{
+  float: left;
+  padding: 30px 15px 0 25px;
+  width:90%;
+}
+
+.sent_msg p {
+  background:#0465ac;
+  border-radius: 12px 15px 15px 0;
+  font-size: 14px;
+  margin: 0;
+  color: #fff;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+}
+
+.outgoing_msg {
+  overflow: hidden;
+  margin: 26px 0 26px;
+}
+
+.sent_msg {
+  float: right;
+  width: 80%;
+}
+
+.input_msg_write input {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  color: #4c4c4c;
+  font-size: 15px;
+  min-height: 48px;
+  width: 100%;
+  outline:none;
+}
+
+.type_msg {
+  border-top: 1px solid #c4c4c4;
+  position: relative;
+}
+
+.msg_send_btn {
+  background: #05728f none repeat scroll 0 0;
+  border:none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  height: 33px;
+  position: absolute;
+  right: 0;
+  top: 11px;
+  width: 33px;
+}
+
+.messaging {
+  padding: 0 0 50px 0;
+}
+
+.msg_history {
+  height: 516px;
+  overflow-y: auto;
+}
+
+
+
+</style>

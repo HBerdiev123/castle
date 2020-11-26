@@ -1,0 +1,62 @@
+ {% load widget_tweaks %}
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="card alert">
+              <div class="card-content" style="display: block;">
+                  <div class="card-body">
+                      <div class="basic-elements">
+                     
+
+                        <form method="POST"  enctype="multipart/form-data">
+                        {% csrf_token %}
+                          <div class="row">
+                            <div class="col-lg-6">
+                             <div class="row">
+                              <div class="row">
+                                <div class="form-group">
+                                  <div class="col-lg-8">
+                                    <div class="form-group">
+                                      <label for="{{ contact_number_form.title.id_for_label }}">Title:</label>
+                                      {{ contact_number_form.title|add_class:"form-control" }}
+                                  </div>
+                                  </div>
+                              </div>
+                            </div>
+                             <div class="row">
+                                <div class="form-group">
+                                      <div class="col-lg-8">
+                                         <div class="form-group">
+                                          <label for="{{ contact_number_form.contact_number.id_for_label }}">Contact Number:</label>
+
+                                          {% render_field contact_number_form.contact_number type="text" class="form-control"  placeholder="Contact Number" %}
+                                          </div>                                                  
+                                      </div>
+                                </div>
+                            </div>
+
+                           
+                            <div class="row">
+                                <div class="form-group">
+                                      <div class="col-lg-8">
+                                         <div class="form-group">
+                                         <button class="btn btn-primary m-b-10 m-l-5" type="submit">submit</button>
+                                          </div>                                                  
+                                      </div>
+                                </div>
+                            
+                            </div>
+                           </div> 
+                        </form>
+                       
+
+                      
+                        
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                </div>
+            </div>
+ 
+      
+
