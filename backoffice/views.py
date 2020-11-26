@@ -395,33 +395,33 @@ def new_property(request):
 	properties=Properties()
 	property_form=PropertyForm(instance=properties)
 	property_category=PropertyCategory.objects.all().distinct()
-	PictureFormSet=inlineformset_factory(Properties, Picture, form=PictureForm, can_delete=True, min_num=1, validate_min=True, extra=0)	# PropertyFormSet = PropertyFormSets()
+	PictureFormSet=inlineformset_factory(Properties, Picture, form=PictureForm, fields =['picture'], can_delete=True, min_num=1, validate_min=True, extra=0)	# PropertyFormSet = PropertyFormSets()
 	formset=PictureFormSet(instance=properties)
 	if request.method == "POST":
 		property_form = PropertyForm(request.POST, request.FILES)
 		formset=PictureFormSet(request.POST, request.FILES)
-		if formset.is_valid()  and  property_form.is_valid():
+		if property_form.is_valid():
 			created_property=property_form.save(commit=False)
 			formset=PictureFormSet(request.POST or None, request.FILES or None, instance=created_property)
 			files=request.FILES
-
-			if formset.is_valid():
-				created_property.save()
-				property_form.save_m2m()
-				property_id=created_property.id
-				title=property_form.cleaned_data['title']
-				for key in files:
-					Picture.objects.create(title=title, properties=Properties.objects.get(id=property_id), picture=files[key])
+			
+			# if formset.is_valid():
+			created_property.save()
+			property_form.save_m2m()
+			property_id=created_property.id
+			title=property_form.cleaned_data['title']
+			for key in files:
+				Picture.objects.create(title=title, properties=Properties.objects.get(id=property_id), picture=files[key])
 				
 				# for key in files:
 				# 	Picture.objects.create(title=title, properties=Properties.objects.get(id=property_id), picture=key)
-				return render(request, 'backoffice/index.html')
+			return redirect('backoffice:index')
 			# else:
 			# 	property_form = PropertyForm(instance=properties)
 			# 	formset=formset=PictureFormSet()
 	else:
 		property_form = PropertyForm(instance=properties)
-		formset=PictureFormSet(instance=properties)
+		formset=PictureFormSet()
 	context={
 		'property_form': property_form, 
 		'formset':formset,
@@ -464,21 +464,21 @@ def manage_properties(request, id=None):
 			# created_property.save_m2m()
 			formset=PictureFormSet(request.POST or None, request.FILES or None, instance=created_property)
 			files=request.FILES.getlist('picture_set-0-picture')
-			if formset.is_valid():
-				created_property.save()
-				property_form.save_m2m()
+			# if formset.is_valid():
+			created_property.save()
+			property_form.save_m2m()
 				
 				# formset.save()
-				property_id=id
-				title=property_form.cleaned_data['title']
-				for key in files:
+			property_id=id
+			title=property_form.cleaned_data['title']
+			for key in files:
 					# file_instance=Picture(properties=property_id, picture=key)
 					# file_instance.save()
 					
-					Picture.objects.create(title=title, properties=Properties.objects.get(id=property_id), picture=key)
-				return render(request, 'backoffice/index.html')
-			else:
-				formset=PictureFormSet(request.POST or None, request.FILES or None, instance=properties)
+				Picture.objects.create(title=title, properties=Properties.objects.get(id=property_id), picture=key)
+			return redirect('backoffice:index')
+			# else:
+			# 	formset=PictureFormSet(request.POST or None, request.FILES or None, instance=properties)
 
 	else:
 		property_form = PropertyForm(instance=properties)
@@ -516,19 +516,6 @@ def uploadpicture(request):
 			else:
 				data = {'is_valid': False}
 			return JsonResponse(data)
-
-		# if form.is_valid():
-		# 	image = form.save()
-		# 	print('??????????????')
-
-		# 	data = {'is_valid': True, 'name': picture.image.name, 'url': picture.image.url}
-		# else:
-			# print(' invalid ??????????????')
-			# data = {'is_valid': False}
-		
-	# return None
-
-
 
 
 
@@ -647,7 +634,6 @@ def change_status(request):
 		data = {'message':'failed'}
 		return HttpResponse(json.dumps(data), content_type="application/json")
 
-
 @login_required
 def send_property(request):
 
@@ -669,41 +655,45 @@ def send_property(request):
 		
 		}
 
+		data={}
 		if recipient_email:
 			html_message = render_to_string('backoffice/snippets/email_template.html', context)
 			send_mail('Subject', html_message, 'cloud.berdiyev@gmail.com',  [recipient_email], html_message=html_message)
-		# replyForm.save()
-		# data = {'status':'sent'}
+			# replyForm.save()
+			data['emailstatus']='sent'
 		# return HttpResponse(json.dumps(data), content_type="application/json")
 
 
+		if recipient_phone_number:
+			new_url='http://castle787.herokuapp.com/rentals/search/?query=%s&location=&category=%s&purpose=%s&available_from=%s&min_bed=%s&min_bath=%s&min_area=%s&max_area=%s&min_price=%s&max_price=%s' % (query, category, purpose, available_from, min_bed, min_bath,  min_area, max_area, min_price, max_price)
 
-		new_url='http://castle787.herokuapp.com/rentals/search/?query=%s&location=&category=%s&purpose=%s&available_from=%s&min_bed=%s&min_bath=%s&min_area=%s&max_area=%s&min_price=%s&max_price=%s' % (query, category, purpose, available_from, min_bed, min_bath,  min_area, max_area, min_price, max_price)
+			# Your Account Sid and Auth Token from twilio.com/console
+			# and set the environment variables. See http://twil.io/secure
+			twilloaccount=TwilloContact.objects.all().last()
+			account ='%s' % twilloaccount.twillo_account
+			token = '%s' % twilloaccount.twillo_token
+			# account='ACb68fa66b2e3a3cd32d25c37542db4f36'
+			# token='010d58583d65ff34a2acd9584b01240e'
+			
+			
+			print('twillo details')
+			print(account)
+			print(token)
+			client = Client(account, token)
 
-		# Your Account Sid and Auth Token from twilio.com/console
-		# and set the environment variables. See http://twil.io/secure
-		twilloaccount=TwilloContact.objects.all().last()
-		account='ACb68fa66b2e3a3cd32d25c37542db4f36'
-		token='010d58583d65ff34a2acd9584b01240e'
+			
+			try:
+				message = client.messages.create(from_='+19166195461', to='+4915775140214', body=new_url)
+				data['twillostatus']='sent'
+			  # message = client.messages.create(from_='+19166195461', to='+491784047362', body=new_url, url=new_url)
+				print(message.sid)
+
+
+			except TwilioRestException as e:
+				data['twillostatus']='SMS has not been sent. Please chack your account or phone number'
+			 	# data = {}
 		
-		# account = twilloaccount.twillo_account
-		# token = twilloaccount.twillo_token
-		print('twillo details')
-		print(account)
-		print(token)
-		client = Client(account, token)
-
-		
-		try:
-		  message = client.messages.create(from_='+19166195461', to='+4915775140214', body=new_url)
-
-		  # message = client.messages.create(from_='+19166195461', to='+491784047362', body=new_url, url=new_url)
-		  print(message.sid)
-
-
-		except TwilioRestException as e:
-			data = {'status':e}
-			return HttpResponse(json.dumps(data), content_type="application/json")
+		return HttpResponse(json.dumps(data), content_type="application/json")
 # 491784047362
 		# message = client.messages.create(body='testing', from_='+19166195461', to='+4915775140214')
 		# if message:
@@ -711,6 +701,8 @@ def send_property(request):
 	else:
 		data = {'status':'Failed'}
 		return HttpResponse(json.dumps(data), content_type="application/json")
+
+
 
 
 # class ManageFeature(generic.DetailView):

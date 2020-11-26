@@ -1,0 +1,228 @@
+    <form class="callus top30 clearfix centered" id="search_form" method="get" action="{% url "rentals:property_search" %}">
+          <div class="row">
+           
+              <div class="col-sm-6">
+                <div class="single-query form-group">
+                  <input type="text" name='query' id='query' class="keyword-input" placeholder="Keyword (e.g. 'office')">
+                </div>
+              </div>
+            
+              <div class="col-sm-6">
+                <div class="single-query form-group">
+                  <input type="text" name='location' id='location' class="keyword-input" placeholder="Location (e.g. 'Gummersbach')">
+                  {% comment %}
+                 
+                 {#  <div class="intro">
+                     <select id="location", name="location">
+                      <option value="" selected="">Location</option>
+                      <option value="">All areas</option>
+                      
+                      {% for i in property %}
+                      <option value="{{i.id}}">{{i.city}}</option>
+                      {% endfor %}
+                    </select>
+                  </div> #}
+
+                  {% endcomment %}
+                </div>
+              </div>
+              
+              <div class="col-sm-6">
+                <div class="single-query form-group">
+                  <div class="intro">
+                    <select id="category", name="category">
+                      <option value="" selected="">Property Type</option>
+                      <option value="" >All type</option>
+                      {% for i in property_category %}
+                      <option value="{{i.id}}">{{i.title}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="single-query form-group">
+                  <div class="intro">
+                    <select id="purpose" name="purpose">
+                      <option value="" class="active">Purpose</option>
+                      <option>All</option>
+                     {% for key, value in property_purpose %}
+                      <option value="{{key}}" {% if property_purpose == key %} selected {% endif %}>{{value}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="single-query form-group">
+                  <div class="intro">
+                    <input type="date" class="form-control" id="available_from" name="available_from">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row search-2">
+                  <div class="col-sm-6">
+                    <div class="single-query form-group">
+                      <div class="intro">
+                        <select id="min_bed", name="min_bed"  >
+                          <option value="0" >Min Beds</option>
+                          <option value="1">1</option>
+                          <option value="2" >2</option>
+                          <option value="3" >3</option>
+                          <option value="4" >4</option>
+                          <option value="5" >5</option>
+                          <option value="6" >6</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="single-query form-group">
+                      <div class="intro">
+                        <select id="min_bath", name="min_bath">
+                          <option value="0" class="active">Min Baths</option>
+                          <option value="1" >1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="single-query form-group">
+                      <input type="text" id="min_area"  name="min_area"  class="keyword-input" placeholder="Min Area (sq m)">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="single-query form-group">
+                      <input id="max_area" name="max_area" type="text"  class="keyword-input" placeholder="Max Area (sq m)">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+                <div class="col-sm-6" style="display: none;">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="single-query form-group">
+                        <input type="text" id="min_price" style="display: none;" name="min_price" class="keyword-input" placeholder="Min price ">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="single-query form-group">
+                     
+                         <input type="text" id="max_price" style="display: none;" name="max_price" class="keyword-input" placeholder="Max price">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+         
+             
+              <div class="col-sm-12 bottom30">
+                <div class="single-query-slider">
+                  <label>Preisklasse:</label>
+                  <div class="price text-right">
+                    <span>€</span>
+                    <div class="leftLabel"></div>
+                    <span>to €</span>
+                    <div class="rightLabel"></div>
+                  </div>
+               
+                  <div data-range_min="0" data-range_max="{{max_price}}" data-cur_min="0" data-cur_max="{{max_price}}" class="nstSlider">
+                    <div class="bar"></div>
+                    <div class="leftGrip" ></div>
+                    <div class="rightGrip"></div>
+                  </div>
+                </div>
+              </div>
+          
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="group-button-search margin40">
+                <a data-toggle="collapse" href=".html" class="more-filter">
+                  <i class="fa fa-plus text-1 bg-color-yello" aria-hidden="true"></i>
+                  <i class="fa fa-minus text-2 hide bg-color-yello" aria-hidden="true"></i>
+                  <div class="text-1">Show more search options</div>
+                  <div class="text-2 hide">less more search options</div>
+                </a>
+              </div>
+            </div>
+            <div class="col-sm-6 form-group top20 text-right">
+                 <input class="btn-blue border_radius" type="submit" value="Suchen">
+
+            </div>
+          </div>
+          <div class="search-propertie-filters collapse">
+            <div class="container-2 bottom30">
+              <div class="row">
+                <div class="col-md-4 col-sm-6">
+                  <div class="search-form-group white">
+                    <input type="checkbox" name="check-box" />
+                    <span>Washer and Dryer</span>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                  <div class="search-form-group white">
+                    <input type="checkbox" name="check-box" />
+                    <span>Washer and Dryer</span>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                  <div class="search-form-group white">
+                    <input type="checkbox" name="check-box" />
+                    <span>Washer and Dryer</span>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                  <div class="search-form-group white">
+                    <input type="checkbox" name="check-box" />
+                    <span>Balcony</span>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                  <div class="search-form-group white">
+                    <input type="checkbox" name="check-box" />
+                    <span>Balcony</span>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                  <div class="search-form-group white">
+                    <input type="checkbox" name="check-box" />
+                    <span>Balcony</span>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                  <div class="search-form-group white">
+                    <input type="checkbox" name="check-box" />
+                    <span>Storage</span>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                  <div class="search-form-group white">
+                    <input type="checkbox" name="check-box" />
+                    <span>Storage</span>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                  <div class="search-form-group white">
+                    <input type="checkbox" name="check-box" />
+                    <span>Storage</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+</form>

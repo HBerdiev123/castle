@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.mail import BadHeaderError, send_mail
 from django.http      import HttpResponse, HttpResponseRedirect
 from additions.models import FAQ
-from property.models  import Property
+from rentals.models   import Properties
 from profiles.models  import Team 
 from contacts.models  import Emails
 from django.contrib.auth.models import User
@@ -13,9 +13,9 @@ from django.views.decorators.vary  import vary_on_cookie
 @vary_on_cookie
 @cache_page(60)
 def home(request):
-	objs     = Property.objects.all()[9:]
+	objs     = Properties.objects.all()[9:]
 	teams    = User.objects.filter(is_active=True, is_staff=True)[3:] 
-	featured = Property.objects.filter(featured=True)[10:]
+	featured = Properties.objects.filter(featured=True)[10:]
 	
 	return render(request, 'home/index.html',{
 		'objs':objs,

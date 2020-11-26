@@ -143,7 +143,7 @@ def detail_agent(request, id):
 	page_num = int(request.GET.get('page', 1))
 	if page_num>paginator.num_pages:
 		raise Http404
-	properties = paginator.page(page_num)
+	properties = paginator.page(page_num) 
 
 	if is_ajax(request):
 		return render(request, 'agent/_properties.html', {'properties':properties})	

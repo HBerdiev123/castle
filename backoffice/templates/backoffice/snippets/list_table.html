@@ -1,5 +1,5 @@
 {% load static %}
-<script type='text/javascript' src="{% static 'assets/js/lib/jquery.min.js' %}"></script>
+<script type='text/javascript' src="{% static '/backoffice/assets/js/lib/jquery.min.js' %}"></script>
 
     <div id='list_table' class="card-body">
       <table class="table table-responsive table-hover ">
@@ -80,9 +80,7 @@
 
 
 {% comment %}
-{# 
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
- #}
+
  {% endcomment %}
 
 {% csrf_token %}

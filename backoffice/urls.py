@@ -8,7 +8,7 @@ from .views import index, search_and_filter, new_property, create_property_pictu
 app_name = 'backoffice'
 urlpatterns = [
 
-  path('index/', index, name='index'),
+  path('', index, name='index'),
   path('allproperty/', views.allproperty, name='allproperty'),
   path('activeproperty/', views.activeproperties, name='activeproperties'),
   path('propertyforsale/', views.propertyforsale, name='propertyforsale'),

@@ -534,11 +534,15 @@ function readImage() {
 
             picReader.readAsDataURL(file);
         }
+        $("#id_picture_set-0-picture").val('');
+        
         $("#pro-image").val('');
     } else {
         console.log('Browser not support');
     }
 }
+
+
 
 
 

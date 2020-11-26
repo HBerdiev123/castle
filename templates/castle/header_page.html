@@ -9,9 +9,9 @@
         </div>
         <div class="col-md-7 text-right">
           <ul class="breadcrumb_top text-right">
-            <li><a href="favorite_properties.html"><i class="icon-icons43"></i>Favorites</a></li>
-            <li><a href="submit_property.html"><i class="icon-icons215"></i>Submit Property</a></li>
-            <li><a href="my_properties.html"><i class="icon-icons215"></i>My Property</a></li>
+             <li><a href="{% url 'profile:favorites' %}"><i class="icon-icons43"></i>Favorites</a></li>
+             {% if request.user.is_staff %}<li><a href="{% url 'backoffice:index' %}"><i class="icon-icons215"></i>Backoffice</a></li>{%endif%}
+              {% if request.user.is_staff %}<li><a href="my_properties.html"><i class="icon-icons215"></i>My Property</a></li>{% endif %}
             {% if request.user.is_authenticated %}
               <li><a href="{% url "account:profile" %}"><i class="icon-icons230"></i>{{request.user.username}}</a></li>
             {% endif %}
@@ -20,7 +20,6 @@
                   <i class="icon-icons179"></i>
                     {% if request.user.is_authenticated %}Logout{% else %}Login/Register{% endif %}</a>
               </li>
-              
           </ul>
         </div>
       </div>
