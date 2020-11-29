@@ -130,44 +130,79 @@
                                                         </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6 form-group float-left">
+                                                     <div class="col-sm-3 form-group float-left">
                                                         <button class="btn btn-primary m-b-10 m-l-5" type="submit" >Search
                                                         </button>
-                                                    </div>
+                                                     </div>
 
-                                                    <div class="col-sm-6 form-group float-left">
-                                                       <button class="btn btn-primary btn-addon" data-toggle="modal" data-target="#exampleModalCenter" type="button"><i class="ti-email"></i>Send</button>
-                                                    </div>
 
-                                                <div class="modal fade"  id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                          <h5 class="modal-title" id="exampleModalLongTitle">Send Message</h5>
-                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                          <span aria-hidden="true">&times;</span>
-                                                          </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                           <form>
-                                                              <div class="form-group">
-                                                                <label for="recipient_phone_number"  class="col-form-label">Phone Number:</label>
-                                                                <input type="text" class="form-control" placeholder="Enter Mobile Phone Number"  id="recipient_phone_number">
-                                                              </div>
-                                                              <div class="form-group">
-                                                                <label for="recipient_email"  class="col-form-label">Email:</label>
-                                                              <input type="email" class="form-control" placeholder="Enter email" id="recipient_email">
-                                                              </div>
-                                                            </form>
-                                                          
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Schließen</button>
-                                                          <button type="button" data-dismiss="modal" onclick="sendpropertylist()" class="btn btn-success">Send</button>
-                                                        </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
+                                                 <div class="col-sm-8 ">
+                                   <div class="col-sm-5 float-left ">
+                                   <button class="btn btn-primary btn-addon  m-b-10 m-l-5" data-toggle="modal" data-target="#exampleModalCenter" type="button"><i class="ti-email"></i>Send Email</button>
+                                 </div>
+                                 <div class="col-sm-5 float-right ">
+                                      <button class="btn btn-primary btn-addon  m-b-10 m-l-5" data-toggle="modal" data-target="#exampleModalCenter1" type="button"><i class="ti-email"></i>Send SMS  </button>
+                                </div>
+                                </div>                   
+                                
+                            <div class="modal fade"  id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLongTitle">Send Email</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form>
+                                        
+                                          <div class="form-group">
+                                            <label for="recipient_email"  class="col-form-label">Email:</label>
+                                          <input type="email" class="form-control" placeholder="Enter email" id="recipient_email">
+                                          </div>
+                                        </form>
+                                      
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-danger" data-dismiss="modal">Schließen</button>
+                                      
+
+                                      <button type="button" data-dismiss="modal" onclick="sendpropertylistbyemail()" class="btn btn-success">Send Email</button>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <div class="modal fade"  id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLongTitle">Send Message</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form>
+                                          <div class="form-group">
+                                            <label for="recipient_phone_number"  class="col-form-label">Phone Number:</label>
+                                            <input type="text" class="form-control" placeholder="Phone Number"  id="recipient_phone_number">
+                                          </div>
+                                          <div class="form-group">
+                                          
+                                        </form>
+                                      
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-danger" data-dismiss="modal">Schließen</button>
+                                      
+                                      <button type="button" data-dismiss="modal" onclick="sendpropertylist()" class="btn btn-success">Send SMS</button>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -403,8 +438,6 @@
         var csrftoken = getCookie('csrftoken');
 
 
-
-
         function sendpropertylistbyemail(){
             var query=document.getElementById('query').value;
             var category=document.getElementById('category').value;
@@ -448,12 +481,7 @@
                                                     
                                             };
                     
-
-
-
-
-
-                                         
+                           
                                        }
                   })
                                           
