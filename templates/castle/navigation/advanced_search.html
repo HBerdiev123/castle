@@ -4,7 +4,7 @@
     <ul class="breadcrumb_top">
       <li><a href="{% url 'profile:favorites' %}"><i class="icon-icons43"></i>Favorites</a></li>
        {% if request.user.is_staff %}<li><a href="{% url 'backoffice:index' %}"><i class="icon-icons215"></i>Backoffice</a></li>{%endif%}
-       {% if request.user.is_staff %}<li><a href="my_properties.html"><i class="icon-icons215"></i>My Property</a></li>{% endif %}
+       {% if request.user.is_staff %}<li><a href="{% url "profile:profile" %}"><i class="icon-icons215"></i>My Property</a></li>{% endif %}
        {% if request.user.is_authenticated %}
               <li><a href="{% url "account:profile" %}"><i class="icon-icons230"></i>{{request.user.username}}</a></li>
             {% endif %}
