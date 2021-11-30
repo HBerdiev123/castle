@@ -105,6 +105,7 @@ class PropertyManager(models.Manager):
 class Property(models.Model):
 	user		     = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='properties', on_delete=models.CASCADE)
 	address            = models.CharField(max_length=255)
+	title   		 = models.CharField(blank=True, max_length=155)
 	short_description  = models.CharField(max_length=150, blank=True, null=True)
 	size             = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.00'))])
 	price			 = models.DecimalField(max_digits=15, decimal_places=2, validators=[MinValueValidator(Decimal('0.00'))])

@@ -16,28 +16,35 @@ import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE_PROTOCOL =  True
-META_SITE_PROTOCOL = 'https'
-META_SITE_DOMAIN = True
+# SITE_PROTOCOL =  True
+# META_SITE_PROTOCOL = 'https'
+# META_SITE_DOMAIN = True
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'l#y!q1w6v&0i$%&^34%(1aosewv%qew$@t1%))e33-+xk=wxd$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True    
-ALLOWED_HOSTS = ['castle787.herokuapp.com']
+ALLOWED_HOSTS = ['castle787.herokuapp.com', "*"]
 
 
-SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = True
 # SESSION_COOKIE_SECURE = False
 # CSRF_COOKIE_SECURE = False
 # SECURE_HSTS_SECONDS = 1
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # SECURE_HSTS_PRELOAD =  True
 
+CORS_REPLACE_HTTPS_REFERER      = False
+HOST_SCHEME                     = "http://"
+SECURE_PROXY_SSL_HEADER         = None
+SECURE_SSL_REDIRECT             = False
+SESSION_COOKIE_SECURE           = False
+CSRF_COOKIE_SECURE              = False
+SECURE_HSTS_SECONDS             = None
+SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
+SECURE_FRAME_DENY               = False
 
 SITE_ID = 1
 
@@ -124,10 +131,10 @@ DATABASES = {
 
        'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'castel',
-        'USER': 'castel',
+        'NAME': 'castle',
+        'USER': 'castle',
         'PASSWORD': 'Adgjmptw',
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
@@ -221,8 +228,8 @@ CKEDITOR_CONFIGS = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'cloud.berdiyev@gmail.com'
-EMAIL_HOST_PASSWORD = 'AdgjmptwwtpmjgdA' #past the key or password app here
+EMAIL_HOST_USER = 'your email'
+EMAIL_HOST_PASSWORD = 'Your password' #past the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'default from email'

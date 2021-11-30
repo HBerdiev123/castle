@@ -13,15 +13,18 @@ from django.views.decorators.vary  import vary_on_cookie
 @vary_on_cookie
 @cache_page(60)
 def home(request):
-	objs     = Properties.objects.all()[9:]
+	hauses     = Properties.objects.all()[9:]
+	print(hauses)
 	teams    = User.objects.filter(is_active=True, is_staff=True)[3:] 
 	featured = Properties.objects.filter(featured=True)[10:]
 	
 	return render(request, 'home/index.html',{
-		'objs':objs,
+		'hauses':hauses,
 		'teams':teams,
 		'featured':featured})
 
+@vary_on_cookie
+@cache_page(3600)
 def contacts(request):
 	return render(request, 'contacts/contact.html',{})
 
@@ -37,15 +40,9 @@ def error_404(request):
 	return render(request, 'errors/404.html')
 
 def handler404(request, exception):
-	# response = render_to_response('404.html', context_instance = RequestContext(request))
-	# response.status_code=404
-	# response = render(request, '404.html', {})
-	# response.status_code = 404
 	return render(request, '404.html', {})
 
 def handler500(request, *args, **kwargs):
-	# response = render_to_response('500.html', context_instance = RequestContext(request))
-	# response.status_code=500
 	return render(request, '500.html', {})
 
 
